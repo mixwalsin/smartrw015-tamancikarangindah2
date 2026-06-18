@@ -313,7 +313,15 @@ class PengaduanService
 
     private function generateTicketNumber(): string
     {
-        return 'PGD-' . date('Ym') . '-' . strtoupper(substr(bin2hex(random_bytes(4)), 0, 6));
+        $period = date('Ym');
+        $sequence = $this->repository->nextTicketSequence($period);
+
+        do {
+            $ticket = 'PGD-' . $period . '-' . str_pad((string) $sequence, 4, '0', STR_PAD_LEFT);
+            $sequence++;
+        } while ($this->repository->ticketExists($ticket));
+
+        return $ticket;
     }
 
     private function validateStatusTransition(string $from, string $to): void

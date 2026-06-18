@@ -151,6 +151,28 @@ class PengaduanModel extends Model
         );
     }
 
+    public function nextTicketSequence(string $period): int
+    {
+        $rows = $this->query(
+            "SELECT MAX(CAST(SUBSTRING_INDEX(no_tiket, '-', -1) AS UNSIGNED)) AS last_sequence
+             FROM {$this->table}
+             WHERE no_tiket LIKE ?",
+            ['PGD-' . $period . '-%']
+        );
+
+        return ((int) ($rows[0]['last_sequence'] ?? 0)) + 1;
+    }
+
+    public function ticketExists(string $ticket): bool
+    {
+        $rows = $this->query(
+            "SELECT COUNT(*) AS total FROM {$this->table} WHERE no_tiket = ?",
+            [$ticket]
+        );
+
+        return (int) ($rows[0]['total'] ?? 0) > 0;
+    }
+
     private function buildFilterQuery(array $filters, array $actor): array
     {
         $conditions = [];

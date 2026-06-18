@@ -54,7 +54,6 @@ class PengaduanController extends Controller
     public function store(): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'super_admin', 'rw', 'ketua_rw', 'sekretaris_rw', 'bendahara_rw', 'rt', 'ketua_rt', 'admin_rt');
         if (!verifyCsrf()) {
             setFlash('error', 'Token keamanan tidak valid.');
             $this->redirect('pengaduan/create');

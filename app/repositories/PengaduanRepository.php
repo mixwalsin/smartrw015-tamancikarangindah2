@@ -102,6 +102,17 @@ class PengaduanRepository
         return (int) $this->disposisiRwModel->insert($data);
     }
 
+
+    public function nextTicketSequence(string $period): int
+    {
+        return $this->pengaduanModel->nextTicketSequence($period);
+    }
+
+    public function ticketExists(string $ticket): bool
+    {
+        return $this->pengaduanModel->ticketExists($ticket);
+    }
+
     public function summary(array $actor): array
     {
         return $this->pengaduanModel->getSummary($actor);

@@ -50,7 +50,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Hubungan</label>
-                            <select name="hubungan" class="form-select">
+                            <select name="hubungan" class="form-select" required>
                                 <?php foreach (['Kepala Keluarga','Istri','Anak','Menantu','Cucu','Orang Tua','Mertua','Famili Lain','Pembantu','Lainnya'] as $hubungan): ?>
                                     <option value="<?= e($hubungan) ?>"><?= e($hubungan) ?></option>
                                 <?php endforeach; ?>

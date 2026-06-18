@@ -32,7 +32,7 @@
                             <td><?= e($row['kepala_keluarga']) ?></td>
                             <td><?= e(truncate($row['alamat'], 45)) ?></td>
                             <td>RT <?= e($row['rt']) ?> / RW <?= e($row['rw']) ?></td>
-                            <td><?= (int) ($row['jumlah_anggota_aktual'] ?? $row['jumlah_anggota']) ?></td>
+                            <td><?= (int) ($row['jumlah_anggota_terhitung'] ?? $row['jumlah_anggota']) ?></td>
                             <td class="text-nowrap">
                                 <a href="<?= url('kartu-keluarga/show/' . $row['id']) ?>" class="btn btn-sm btn-outline-info">
                                     <i class="bi bi-eye"></i>

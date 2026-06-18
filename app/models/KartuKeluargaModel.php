@@ -23,7 +23,7 @@ class KartuKeluargaModel extends Model
         $offset = ($page - 1) * $perPage;
         $total  = $this->count();
 
-        $sql = "SELECT kk.*, COALESCE(COUNT(ak.id), 0) AS jumlah_anggota_aktual
+        $sql = "SELECT kk.*, COALESCE(COUNT(ak.id), 0) AS jumlah_anggota_terhitung
                 FROM {$this->table} kk
                 LEFT JOIN anggota_keluarga ak ON ak.kartu_keluarga_id = kk.id
                 GROUP BY kk.id

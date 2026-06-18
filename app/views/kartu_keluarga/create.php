@@ -25,14 +25,14 @@
                                        value="<?= e($_POST['kepala_keluarga'] ?? '') ?>">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">RT</label>
-                                <input type="text" name="rt" maxlength="3" class="form-control" placeholder="001"
+                                <label class="form-label fw-semibold">RT <span class="text-danger">*</span></label>
+                                <input type="text" name="rt" maxlength="3" class="form-control" placeholder="001" required
                                        value="<?= e($_POST['rt'] ?? '') ?>">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">RW</label>
-                                <input type="text" name="rw" maxlength="3" class="form-control" placeholder="015"
-                                       value="<?= e($_POST['rw'] ?? '015') ?>">
+                                <label class="form-label fw-semibold">RW <span class="text-danger">*</span></label>
+                                <input type="text" name="rw" maxlength="3" class="form-control" placeholder="015" required
+                                       value="<?= e($_POST['rw'] ?? '') ?>">
                             </div>
                             <div class="col-12">
                                 <label class="form-label fw-semibold">Alamat <span class="text-danger">*</span></label>

@@ -14,6 +14,8 @@ require_once APP_PATH . '/models/RiwayatKKModel.php';
 
 class KartuKeluargaController extends Controller
 {
+    private const WARGA_OPTION_LIMIT_MULTIPLIER = 20;
+
     private KartuKeluargaModel $kartuKeluargaModel;
     private AnggotaKeluargaModel $anggotaKeluargaModel;
     private RiwayatKKModel $riwayatKKModel;
@@ -57,8 +59,14 @@ class KartuKeluargaController extends Controller
         }
 
         $data = $this->buildKkPayload();
-        if ($data['nomor_kk'] === '' || $data['kepala_keluarga'] === '' || $data['alamat'] === '') {
-            setFlash('error', 'Nomor KK, Kepala Keluarga, dan Alamat wajib diisi.');
+        if (
+            $data['nomor_kk'] === '' ||
+            $data['kepala_keluarga'] === '' ||
+            $data['alamat'] === '' ||
+            $data['rt'] === '' ||
+            $data['rw'] === ''
+        ) {
+            setFlash('error', 'Nomor KK, Kepala Keluarga, Alamat, RT, dan RW wajib diisi.');
             $this->redirect('kartu-keluarga/create');
         }
 
@@ -89,7 +97,7 @@ class KartuKeluargaController extends Controller
         }
 
         $this->kartuKeluargaModel->syncJumlahAnggota((int) $id);
-        $kk = $this->kartuKeluargaModel->find((int) $id);
+        $kk['jumlah_anggota'] = hitungJumlahAnggotaKk((int) $id);
 
         $this->view('kartu_keluarga/show', [
             'title'         => 'Detail Kartu Keluarga - ' . APP_NAME,
@@ -176,6 +184,10 @@ class KartuKeluargaController extends Controller
             'rt'     => formatRtRw((string) $this->input('rt', '')),
             'rw'     => formatRtRw((string) $this->input('rw', '')),
         ];
+        if ($data['alamat'] === '' || $data['rt'] === '' || $data['rw'] === '') {
+            setFlash('error', 'Alamat, RT, dan RW baru wajib diisi.');
+            $this->redirect('kartu-keluarga/pindah/' . $id);
+        }
 
         $this->kartuKeluargaModel->update($kkId, $data);
         $this->riwayatKKModel->log(
@@ -233,8 +245,17 @@ class KartuKeluargaController extends Controller
         $this->requireRole('admin', 'rw', 'rt');
 
         $data = $this->buildKkPayload();
-        if ($data['nomor_kk'] === '' || $data['kepala_keluarga'] === '' || $data['alamat'] === '') {
-            $this->json(['message' => 'Nomor KK, Kepala Keluarga, dan Alamat wajib diisi.'], 422);
+        if (
+            $data['nomor_kk'] === '' ||
+            $data['kepala_keluarga'] === '' ||
+            $data['alamat'] === '' ||
+            $data['rt'] === '' ||
+            $data['rw'] === ''
+        ) {
+            $this->json(['message' => 'Nomor KK, Kepala Keluarga, Alamat, RT, dan RW wajib diisi.'], 422);
+        }
+        if ($this->kartuKeluargaModel->findByNomorKk($data['nomor_kk'])) {
+            $this->json(['message' => 'Nomor KK sudah terdaftar.'], 409);
         }
         $kkId = $this->kartuKeluargaModel->insert($data);
         if ($kkId === false) {
@@ -287,6 +308,9 @@ class KartuKeluargaController extends Controller
             'rt'     => formatRtRw((string) $this->input('rt', '')),
             'rw'     => formatRtRw((string) $this->input('rw', '')),
         ];
+        if ($data['alamat'] === '' || $data['rt'] === '' || $data['rw'] === '') {
+            $this->json(['message' => 'Alamat, RT, dan RW baru wajib diisi.'], 422);
+        }
         $this->kartuKeluargaModel->update($kkId, $data);
         $this->riwayatKKModel->log($kkId, 'Pindah KK', 'Perubahan lokasi via API.', json_encode($kk), json_encode($data));
 
@@ -301,8 +325,10 @@ class KartuKeluargaController extends Controller
 
     private function buildKkPayload(): array
     {
+        $nomorKk = (string) preg_replace('/[^0-9]/', '', (string) $this->input('nomor_kk', ''));
+
         return [
-            'nomor_kk'        => preg_replace('/[^0-9]/', '', (string) $this->input('nomor_kk', '')) ?? '',
+            'nomor_kk'        => $nomorKk,
             'kepala_keluarga' => trim((string) $this->input('kepala_keluarga', '')),
             'alamat'          => trim((string) $this->input('alamat', '')),
             'rt'              => formatRtRw((string) $this->input('rt', '')),
@@ -314,10 +340,14 @@ class KartuKeluargaController extends Controller
     private function getWargaOptions(): array
     {
         try {
-            return $this->kartuKeluargaModel->query(
-                "SELECT id, nik, nama FROM warga ORDER BY nama ASC LIMIT 200"
-            );
+            $limit = (int) (PAGINATION_LIMIT * self::WARGA_OPTION_LIMIT_MULTIPLIER);
+            $db = Database::getInstance()->getConnection();
+            $stmt = $db->prepare('SELECT id, nik, nama FROM warga ORDER BY nama ASC LIMIT ?');
+            $stmt->bindValue(1, $limit, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
         } catch (Throwable) {
+            error_log('Gagal memuat data warga untuk modul KK.');
             return [];
         }
     }

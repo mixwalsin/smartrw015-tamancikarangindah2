@@ -175,7 +175,7 @@ function slug(string $text): string
  */
 function formatRtRw(string $value): string
 {
-    $clean = preg_replace('/[^0-9]/', '', $value) ?? '';
+    $clean = (string) preg_replace('/[^0-9]/', '', $value);
     if ($clean === '') {
         return '';
     }

@@ -11,22 +11,24 @@ require_once APP_PATH . '/core/Model.php';
 
 class KeuanganModel extends Model
 {
-    protected string $table = 'keuangan';
+    protected string $table = 'kas_transactions';
 
     public function ringkasanBulanIni(): array
     {
         $rows = $this->query(
-            "SELECT jenis, SUM(jumlah) as total
+            "SELECT transaction_type, SUM(amount) as total
              FROM {$this->table}
-             WHERE MONTH(tanggal) = MONTH(CURDATE()) AND YEAR(tanggal) = YEAR(CURDATE())
-             GROUP BY jenis"
+             WHERE status = 'approved'
+               AND MONTH(date) = MONTH(CURDATE())
+               AND YEAR(date) = YEAR(CURDATE())
+             GROUP BY transaction_type"
         );
 
         $result = ['pemasukan' => 0, 'pengeluaran' => 0];
         foreach ($rows as $row) {
-            if ($row['jenis'] === 'pemasukan') {
+            if ($row['transaction_type'] === 'pemasukan') {
                 $result['pemasukan'] = (float) $row['total'];
-            } elseif ($row['jenis'] === 'pengeluaran') {
+            } elseif ($row['transaction_type'] === 'pengeluaran') {
                 $result['pengeluaran'] = (float) $row['total'];
             }
         }
@@ -38,9 +40,10 @@ class KeuanganModel extends Model
     {
         $row = $this->query(
             "SELECT
-                SUM(CASE WHEN jenis = 'pemasukan' THEN jumlah ELSE 0 END) -
-                SUM(CASE WHEN jenis = 'pengeluaran' THEN jumlah ELSE 0 END) AS saldo
-             FROM {$this->table}"
+                SUM(CASE WHEN transaction_type = 'pemasukan' THEN amount ELSE 0 END) -
+                SUM(CASE WHEN transaction_type = 'pengeluaran' THEN amount ELSE 0 END) AS saldo
+             FROM {$this->table}
+             WHERE status = 'approved'"
         );
         return (float) ($row[0]['saldo'] ?? 0);
     }

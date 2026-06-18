@@ -59,7 +59,23 @@ $router->get('/surat/print/:id', 'SuratController@print');
 $router->get('/keuangan', 'KeuanganController@index');
 $router->get('/keuangan/create', 'KeuanganController@create');
 $router->post('/keuangan/store', 'KeuanganController@store');
-$router->get('/keuangan/show/:id', 'KeuanganController@show');
+$router->get('/keuangan/edit/:id', 'KeuanganController@edit');
+$router->post('/keuangan/update/:id', 'KeuanganController@update');
+$router->post('/keuangan/delete/:id', 'KeuanganController@delete');
+$router->post('/keuangan/approve/:id', 'KeuanganController@approve');
+$router->post('/keuangan/reject/:id', 'KeuanganController@reject');
+
+$router->get('/keuangan/categories', 'KasCategoryController@index');
+$router->post('/keuangan/categories/store', 'KasCategoryController@store');
+$router->post('/keuangan/categories/delete/:id', 'KasCategoryController@delete');
+
+$router->get('/keuangan/balance', 'KasBalanceController@index');
+
+$router->get('/keuangan/report/monthly', 'KasReportController@monthly');
+$router->get('/keuangan/report/yearly', 'KasReportController@yearly');
+$router->get('/keuangan/report/export-pdf', 'KasReportController@exportPdf');
+$router->get('/keuangan/report/export-excel', 'KasReportController@exportExcel');
+$router->get('/keuangan/report/print', 'KasReportController@print');
 
 // ──────────────────────────────────────────
 // Pengaduan
@@ -134,3 +150,7 @@ $router->post('/admin/users/delete/:id', 'Admin\UserController@delete');
 // ──────────────────────────────────────────
 $router->get('/api/statistik', 'Api\StatistikController@index');
 $router->get('/api/pengaduan', 'Api\PengaduanController@index');
+$router->get('/api/keuangan/transactions', 'KeuanganApiController@transactions');
+$router->get('/api/keuangan/balances', 'KeuanganApiController@balances');
+$router->get('/api/keuangan/reports/monthly', 'KeuanganApiController@monthlyReport');
+$router->get('/api/keuangan/reports/yearly', 'KeuanganApiController@yearlyReport');

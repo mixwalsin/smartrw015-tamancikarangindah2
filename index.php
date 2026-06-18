@@ -34,6 +34,9 @@ spl_autoload_register(function (string $class): void {
 // Load config
 require_once CONFIG_PATH . '/config.php';
 require_once CONFIG_PATH . '/database.php';
+if (file_exists(CONFIG_PATH . '/keuangan.php')) {
+    require_once CONFIG_PATH . '/keuangan.php';
+}
 
 // Load helpers
 require_once APP_PATH . '/helpers/functions.php';

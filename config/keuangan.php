@@ -1,0 +1,8 @@
+<?php
+
+declare(strict_types=1);
+
+define('KEUANGAN_NOTIF_THRESHOLD', 10000000);
+define('KEUANGAN_PREVENT_NEGATIVE_BALANCE', false);
+define('KEUANGAN_REPORT_CURRENCY', 'IDR');
+define('KEUANGAN_TAX_PERCENT', 0.0);

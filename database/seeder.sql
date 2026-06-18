@@ -219,7 +219,7 @@ INSERT INTO `pengaduan_disposisi_rw` (`pengaduan_id`,`rw_id`,`catatan`,`keputusa
 
 INSERT INTO `pengaduan_status_history` (`pengaduan_id`,`status_lama`,`status_baru`,`keterangan`,`changed_by`,`changed_at`) VALUES
 (1,NULL,'diterima','Pengaduan dibuat oleh warga.',4,'2026-06-18 08:00:00'),
-(1,'diterima','diproses_rt','RT memverifikasi laporan dan menyiapkan survey. ',3,'2026-06-18 09:00:00'),
+(1,'diterima','diproses_rt','RT memverifikasi laporan dan menyiapkan survei. ',3,'2026-06-18 09:00:00'),
 (2,NULL,'diterima','Pengaduan dibuat oleh warga.',5,'2026-06-17 07:30:00'),
 (2,'diterima','diproses_rt','RT menerima laporan dan meminta tindak lanjut. ',3,'2026-06-18 08:30:00'),
 (2,'diproses_rt','diproses_rw','Diteruskan ke RW untuk dukungan sumber daya. ',2,'2026-06-18 09:00:00'),

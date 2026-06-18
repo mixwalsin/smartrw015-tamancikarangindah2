@@ -43,7 +43,8 @@ $badgeMap = [
                         <div class="small fw-semibold mb-2">Progress Status</div>
                         <div class="d-flex flex-wrap gap-2">
                             <?php foreach ($statuses as $value => $label): ?>
-                                <?php $done = $currentIndex !== false && ($value !== 'ditolak') && array_search($value, $statusOrder, true) !== false && array_search($value, $statusOrder, true) <= $currentIndex; ?>
+                                <?php $stepIndex = array_search($value, $statusOrder, true); ?>
+                                <?php $done = $currentIndex !== false && ($value !== 'ditolak') && $stepIndex !== false && $stepIndex <= $currentIndex; ?>
                                 <span class="badge rounded-pill <?= $pengaduan['status'] === $value ? 'text-bg-primary' : ($done ? 'text-bg-success' : 'text-bg-light border text-dark') ?>">
                                     <?= e($label) ?>
                                 </span>

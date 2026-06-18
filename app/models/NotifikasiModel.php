@@ -10,6 +10,7 @@ class NotifikasiModel extends Model
 
     public function latestForUser(?int $userId, int $limit = 10): array
     {
+        $limit = max(1, (int) $limit);
         $sql = "SELECT * FROM {$this->table} WHERE user_id IS NULL";
         $bindings = [];
 

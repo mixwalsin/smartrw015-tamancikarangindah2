@@ -302,7 +302,7 @@ class PengaduanService
         if (!empty($actor['id'])) {
             $context = $this->users->findWithRoleContext((int) $actor['id']);
             if ($context) {
-                $actor['role'] = $actor['role'] ?: ($context['role'] ?? '');
+                $actor['role'] = $actor['role'] ?? $context['role'] ?? '';
                 $actor['warga_id'] = $actor['warga_id'] ?? ($context['warga_id'] ?? null);
                 $actor['rt_id'] = $actor['rt_id'] ?? ($context['rt_id'] ?? null);
             }

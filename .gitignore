@@ -1,0 +1,26 @@
+# Dependencies
+/vendor/
+
+# Environment / sensitive files
+.env
+*.env
+config/local.php
+
+# Storage (user uploads - exclude from VCS)
+/storage/uploads/*
+!/storage/uploads/.gitkeep
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
+/storage/logs/
+
+# PHP temp
+*.cache

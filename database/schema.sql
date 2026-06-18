@@ -524,4 +524,22 @@ CREATE TABLE IF NOT EXISTS `log_aktivitas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Audit trail aktivitas seluruh pengguna';
 
+-- ── 25. KK_RIWAYAT ─────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `kk_riwayat` (
+    `id`              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `kk_id`           INT UNSIGNED  NOT NULL,
+    `aksi`            VARCHAR(50)   NOT NULL COMMENT 'tambah_kk, tambah_anggota, pindah_kk, hapus_anggota, ubah_kk',
+    `warga_id`        INT UNSIGNED  NULL COMMENT 'Warga yang terkait perubahan',
+    `keterangan`      TEXT          NULL,
+    `dilakukan_oleh`  INT UNSIGNED  NULL,
+    `created_at`      DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_kkr_kk`      (`kk_id`),
+    INDEX `idx_kkr_warga`   (`warga_id`),
+    INDEX `idx_kkr_created` (`created_at`),
+    CONSTRAINT `fk_kkr_kk`    FOREIGN KEY (`kk_id`)           REFERENCES `kk`(`id`)    ON DELETE CASCADE,
+    CONSTRAINT `fk_kkr_warga` FOREIGN KEY (`warga_id`)        REFERENCES `warga`(`id`) ON DELETE SET NULL,
+    CONSTRAINT `fk_kkr_user`  FOREIGN KEY (`dilakukan_oleh`)  REFERENCES `users`(`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Riwayat perubahan data Kartu Keluarga';
+
 SET FOREIGN_KEY_CHECKS = 1;

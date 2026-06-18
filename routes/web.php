@@ -43,6 +43,22 @@ $router->post('/penduduk/update/:id', 'PendudukController@update');
 $router->post('/penduduk/delete/:id', 'PendudukController@delete');
 
 // ──────────────────────────────────────────
+// Kartu Keluarga
+// ──────────────────────────────────────────
+$router->get('/kartukeluarga', 'KartuKeluargaController@index');
+$router->get('/kartukeluarga/create', 'KartuKeluargaController@create');
+$router->post('/kartukeluarga/store', 'KartuKeluargaController@store');
+$router->get('/kartukeluarga/show/:id', 'KartuKeluargaController@show');
+$router->get('/kartukeluarga/edit/:id', 'KartuKeluargaController@edit');
+$router->post('/kartukeluarga/update/:id', 'KartuKeluargaController@update');
+$router->get('/kartukeluarga/tambah-anggota/:id', 'KartuKeluargaController@tambahAnggota');
+$router->post('/kartukeluarga/store-anggota/:id', 'KartuKeluargaController@storeAnggota');
+$router->get('/kartukeluarga/pindah/:id', 'KartuKeluargaController@pindah');
+$router->post('/kartukeluarga/proses-pindah/:id', 'KartuKeluargaController@prosesPindah');
+$router->get('/kartukeluarga/cetak/:id', 'KartuKeluargaController@cetak');
+$router->get('/kartukeluarga/riwayat/:id', 'KartuKeluargaController@riwayat');
+
+// ──────────────────────────────────────────
 // Surat Menyurat
 // ──────────────────────────────────────────
 $router->get('/surat', 'SuratController@index');
@@ -134,3 +150,4 @@ $router->post('/admin/users/delete/:id', 'Admin\UserController@delete');
 // ──────────────────────────────────────────
 $router->get('/api/statistik', 'Api\StatistikController@index');
 $router->get('/api/pengaduan', 'Api\PengaduanController@index');
+$router->get('/api/warga-lookup', 'KartuKeluargaController@apiWargaLookup');

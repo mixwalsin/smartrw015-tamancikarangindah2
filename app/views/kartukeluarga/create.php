@@ -30,14 +30,11 @@
                                         onchange="syncRtId(this)">
                                     <option value="">-- Pilih RT --</option>
                                     <?php
-                                    $rtList = [
-                                        '001' => 1, '002' => 2, '003' => 3, '004' => 4,
-                                        '005' => 5, '006' => 6, '007' => 7,
-                                    ];
+                                    $currentRt = $_POST['rt'] ?? '';
                                     foreach ($rtList as $kode => $rid):
                                     ?>
                                         <option value="<?= $kode ?>" data-id="<?= $rid ?>"
-                                            <?= ($_POST['rt'] ?? '') === $kode ? 'selected' : '' ?>>
+                                            <?= $currentRt === $kode ? 'selected' : '' ?>>
                                             RT <?= $kode ?>
                                         </option>
                                     <?php endforeach; ?>

@@ -100,6 +100,18 @@ class KartuKeluargaModel extends Model
     }
 
     /**
+     * Check if a KK already has a Kepala Keluarga
+     */
+    public function hasKepalaKeluarga(int $kkId): bool
+    {
+        $stmt = $this->db->prepare(
+            "SELECT COUNT(*) FROM keluarga WHERE kk_id = ? AND hubungan = 'Kepala Keluarga'"
+        );
+        $stmt->execute([$kkId]);
+        return (int) $stmt->fetchColumn() > 0;
+    }
+
+    /**
      * Get all anggota of a KK (with hubungan)
      */
     public function getAnggota(int $kkId): array

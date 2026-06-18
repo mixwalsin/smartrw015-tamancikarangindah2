@@ -16,6 +16,18 @@ class KartuKeluargaController extends Controller
     private KartuKeluargaModel $model;
     private WargaModel $wargaModel;
 
+    /** RT list: [kode => rt_id] */
+    private const RT_LIST = [
+        '001' => 1, '002' => 2, '003' => 3, '004' => 4,
+        '005' => 5, '006' => 6, '007' => 7,
+    ];
+
+    /** Hubungan options */
+    private const HUBUNGAN_LIST = [
+        'Kepala Keluarga', 'Istri', 'Anak', 'Menantu', 'Cucu',
+        'Orang Tua', 'Mertua', 'Famili Lain', 'Pembantu', 'Lainnya',
+    ];
+
     public function __construct()
     {
         $this->model      = new KartuKeluargaModel();
@@ -50,7 +62,8 @@ class KartuKeluargaController extends Controller
         $this->requireRole('admin', 'rw', 'rt');
 
         $this->view('kartukeluarga/create', [
-            'title' => 'Tambah Kartu Keluarga - ' . APP_NAME,
+            'title'  => 'Tambah Kartu Keluarga - ' . APP_NAME,
+            'rtList' => self::RT_LIST,
         ]);
     }
 
@@ -74,7 +87,7 @@ class KartuKeluargaController extends Controller
             $this->redirect('kartukeluarga/create');
         }
 
-        if (strlen($noKk) !== 16 || !ctype_digit($noKk)) {
+        if (!validateNik($noKk)) {
             setFlash('error', 'No. KK harus terdiri dari 16 digit angka.');
             $this->redirect('kartukeluarga/create');
         }
@@ -142,8 +155,9 @@ class KartuKeluargaController extends Controller
         }
 
         $this->view('kartukeluarga/edit', [
-            'title' => 'Edit Kartu Keluarga - ' . APP_NAME,
-            'kk'    => $kk,
+            'title'  => 'Edit Kartu Keluarga - ' . APP_NAME,
+            'kk'     => $kk,
+            'rtList' => self::RT_LIST,
         ]);
     }
 
@@ -205,8 +219,9 @@ class KartuKeluargaController extends Controller
         }
 
         $this->view('kartukeluarga/tambah-anggota', [
-            'title' => 'Tambah Anggota KK - ' . APP_NAME,
-            'kk'    => $kk,
+            'title'       => 'Tambah Anggota KK - ' . APP_NAME,
+            'kk'          => $kk,
+            'hubunganList'=> self::HUBUNGAN_LIST,
         ]);
     }
 
@@ -235,14 +250,9 @@ class KartuKeluargaController extends Controller
         }
 
         // Validate: only one Kepala Keluarga per KK
-        if ($hubungan === 'Kepala Keluarga') {
-            $existing = $this->model->getAnggota((int) $id);
-            foreach ($existing as $a) {
-                if ($a['hubungan'] === 'Kepala Keluarga') {
-                    setFlash('error', 'KK ini sudah memiliki Kepala Keluarga.');
-                    $this->redirect('kartukeluarga/tambah-anggota/' . $id);
-                }
-            }
+        if ($hubungan === 'Kepala Keluarga' && $this->model->hasKepalaKeluarga((int) $id)) {
+            setFlash('error', 'KK ini sudah memiliki Kepala Keluarga.');
+            $this->redirect('kartukeluarga/tambah-anggota/' . $id);
         }
 
         // Check if existing warga by NIK
@@ -272,7 +282,7 @@ class KartuKeluargaController extends Controller
                 $this->redirect('kartukeluarga/tambah-anggota/' . $id);
             }
 
-            if (strlen($nik) !== 16 || !ctype_digit($nik)) {
+            if (!validateNik($nik)) {
                 setFlash('error', 'NIK harus terdiri dari 16 digit angka.');
                 $this->redirect('kartukeluarga/tambah-anggota/' . $id);
             }
@@ -322,10 +332,11 @@ class KartuKeluargaController extends Controller
         $allKk    = $this->model->listForDropdown();
 
         $this->view('kartukeluarga/pindah', [
-            'title'   => 'Pindah KK - ' . APP_NAME,
-            'kk'      => $kk,
-            'anggota' => $anggota,
-            'allKk'   => $allKk,
+            'title'        => 'Pindah KK - ' . APP_NAME,
+            'kk'           => $kk,
+            'anggota'      => $anggota,
+            'allKk'        => $allKk,
+            'hubunganList' => self::HUBUNGAN_LIST,
         ]);
     }
 

@@ -51,8 +51,7 @@
                                 <label class="form-label fw-semibold">Hubungan dalam KK <span class="text-danger">*</span></label>
                                 <select name="hubungan" class="form-select" required>
                                     <option value="">-- Pilih --</option>
-                                    <?php foreach (['Kepala Keluarga','Istri','Anak','Menantu','Cucu',
-                                                    'Orang Tua','Mertua','Famili Lain','Pembantu','Lainnya'] as $h): ?>
+                                    <?php foreach ($hubunganList as $h): ?>
                                         <option value="<?= $h ?>"
                                             <?= ($_POST['hubungan'] ?? '') === $h ? 'selected' : '' ?>>
                                             <?= $h ?>

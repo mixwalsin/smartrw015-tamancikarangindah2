@@ -28,11 +28,7 @@
                                         onchange="syncRtId(this)">
                                     <option value="">-- Pilih RT --</option>
                                     <?php
-                                    $rtList = [
-                                        '001' => 1, '002' => 2, '003' => 3, '004' => 4,
-                                        '005' => 5, '006' => 6, '007' => 7,
-                                    ];
-                                    $currentRt = $_POST['rt'] ?? $kk['rt_text'];
+                                    $currentRt   = $_POST['rt']    ?? $kk['rt_text'];
                                     $currentRtId = $_POST['rt_id'] ?? $kk['rt_id'];
                                     foreach ($rtList as $kode => $rid):
                                     ?>

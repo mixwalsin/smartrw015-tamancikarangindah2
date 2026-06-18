@@ -79,8 +79,8 @@ class KasTransactionRepository
              LEFT JOIN rt ON rt.id = t.rt_id
              WHERE {$whereSql}
              ORDER BY t.date DESC, t.id DESC
-             LIMIT {$perPage} OFFSET {$offset}",
-            $bindings
+             LIMIT ? OFFSET ?",
+            [...$bindings, $perPage, $offset]
         );
 
         $total = (int) ($countResult[0]['total'] ?? 0);

@@ -59,6 +59,7 @@ $router->get('/surat/print/:id', 'SuratController@print');
 $router->get('/keuangan', 'KeuanganController@index');
 $router->get('/keuangan/create', 'KeuanganController@create');
 $router->post('/keuangan/store', 'KeuanganController@store');
+$router->get('/keuangan/show/:id', 'KeuanganController@show');
 $router->get('/keuangan/edit/:id', 'KeuanganController@edit');
 $router->post('/keuangan/update/:id', 'KeuanganController@update');
 $router->post('/keuangan/delete/:id', 'KeuanganController@delete');

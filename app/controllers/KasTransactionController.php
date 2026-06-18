@@ -88,6 +88,22 @@ class KasTransactionController extends Controller
         ]);
     }
 
+    public function show(string $id): void
+    {
+        $this->requireAuth();
+
+        $transaction = $this->service->getTransaction((int) $id);
+        if (!$transaction) {
+            setFlash('error', 'Transaksi tidak ditemukan.');
+            $this->redirect('keuangan');
+        }
+
+        $this->view('keuangan/show', [
+            'title' => 'Detail Transaksi Kas - ' . APP_NAME,
+            'transaction' => $transaction,
+        ]);
+    }
+
     public function update(string $id): void
     {
         $this->requireAuth();

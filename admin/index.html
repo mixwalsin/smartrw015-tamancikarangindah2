@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Admin Smart RW015">
+    <title>Dashboard Admin - Smart RW015</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <a href="index.html" class="d-flex align-items-center">
+                <i class="fas fa-city"></i>
+                <span>Smart RW<strong>015</strong></span>
+            </a>
+            <button class="sidebar-toggle btn btn-sm" id="sidebarToggle">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column">
+                <!-- Dashboard -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">
+                        <i class="fas fa-dashboard"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <!-- Master Data -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#masterDataMenu" data-bs-toggle="collapse">
+                        <i class="fas fa-database"></i>
+                        <span>Master Data</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </a>
+                    <div class="collapse" id="masterDataMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="penduduk.html">
+                                    <i class="fas fa-users"></i>
+                                    <span>Administrasi Penduduk</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="kartu-keluarga.html">
+                                    <i class="fas fa-id-card"></i>
+                                    <span>Kartu Keluarga</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="rumah.html">
+                                    <i class="fas fa-home"></i>
+                                    <span>Rumah</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="rt.html">
+                                    <i class="fas fa-map-pin"></i>
+                                    <span>RT</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="pengurus.html">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>Pengurus RW</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Surat Menyurat -->
+                <li class="nav-item">
+                    <a class="nav-link" href="surat.html">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Surat Menyurat</span>
+                    </a>
+                </li>
+
+                <!-- Keuangan -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#keuanganMenu" data-bs-toggle="collapse">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Keuangan</span>
+                        <i class="fas fa-chevron-down ms-auto"></i>
+                    </a>
+                    <div class="collapse" id="keuanganMenu">
+                        <ul class="nav flex-column ms-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="kas-rw.html">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Kas RW</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="kas-rt.html">
+                                    <i class="fas fa-coins"></i>
+                                    <span>Kas RT</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Kegiatan -->
+                <li class="nav-item">
+                    <a class="nav-link" href="kegiatan.html">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Kegiatan</span>
+                    </a>
+                </li>
+
+                <!-- UMKM -->
+                <li class="nav-item">
+                    <a class="nav-link" href="umkm.html">
+                        <i class="fas fa-store"></i>
+                        <span>UMKM</span>
+                    </a>
+                </li>
+
+                <!-- Posyandu -->
+                <li class="nav-item">
+                    <a class="nav-link" href="posyandu.html">
+                        <i class="fas fa-hospital"></i>
+                        <span>Posyandu</span>
+                    </a>
+                </li>
+
+                <!-- Pengaduan -->
+                <li class="nav-item">
+                    <a class="nav-link" href="pengaduan.html">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span>Pengaduan</span>
+                    </a>
+                </li>
+
+                <!-- Security -->
+                <li class="nav-item">
+                    <a class="nav-link" href="security.html">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Security</span>
+                    </a>
+                </li>
+
+                <!-- Pengumuman -->
+                <li class="nav-item">
+                    <a class="nav-link" href="pengumuman.html">
+                        <i class="fas fa-bell"></i>
+                        <span>Pengumuman</span>
+                    </a>
+                </li>
+
+                <!-- Laporan -->
+                <li class="nav-item">
+                    <a class="nav-link" href="laporan.html">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Laporan</span>
+                    </a>
+                </li>
+
+                <!-- Setting -->
+                <li class="nav-item">
+                    <a class="nav-link" href="setting.html">
+                        <i class="fas fa-cog"></i>
+                        <span>Setting</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <img src="https://ui-avatars.com/api/?name=Admin+RW015" alt="User" class="avatar">
+                <div class="user-details">
+                    <div class="user-name">Pak Sutrisno</div>
+                    <div class="user-role">Ketua RW015</div>
+                </div>
+            </div>
+            <div class="user-actions">
+                <a href="#" class="btn btn-sm btn-icon" title="Edit Profile">
+                    <i class="fas fa-user-edit"></i>
+                </a>
+                <a href="#" class="btn btn-sm btn-icon" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main-content">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+            <div class="container-fluid">
+                <button class="btn btn-link text-dark" id="sidebarToggleBtn">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+                
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    <!-- Search -->
+                    <div class="search-box d-none d-lg-block">
+                        <input type="text" class="form-control form-control-sm" placeholder="Cari...">
+                        <i class="fas fa-search"></i>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="dropdown">
+                        <button class="btn btn-link text-dark position-relative" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell fa-lg"></i>
+                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle">5</span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-header">Notifikasi</li>
+                            <li><a class="dropdown-item" href="#">Pengajuan surat baru dari RT001</a></li>
+                            <li><a class="dropdown-item" href="#">Pengaduan keamanan di RT003</a></li>
+                            <li><a class="dropdown-item" href="#">Laporan keuangan bulanan siap</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Lihat semua notifikasi</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- User Menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-link text-dark" data-bs-toggle="dropdown">
+                            <img src="https://ui-avatars.com/api/?name=Admin+RW015" alt="User" class="avatar-sm">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-key"></i> Ubah Password</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- Page Header -->
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="text-muted mb-0">Selamat datang di Smart RW015</p>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-value">4,250</div>
+                                <div class="stat-label">Total Penduduk</div>
+                            </div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 12%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-value">980</div>
+                                <div class="stat-label">Total KK</div>
+                            </div>
+                            <div class="stat-change positive">
+                                <i class="fas fa-arrow-up"></i> 8%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-value">1,050</div>
+                                <div class="stat-label">Total Rumah</div>
+                            </div>
+                            <div class="stat-change">
+                                <i class="fas fa-minus"></i> 0%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-3 mb-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-map-pin"></i>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-value">7</div>
+                                <div class="stat-label">Total RT</div>
+                            </div>
+                            <div class="stat-change">
+                                <i class="fas fa-minus"></i> 0%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demographic Stats -->
+                <div class="row mb-4">
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-male"></i>
+                            <div class="mini-stat-value">2,150</div>
+                            <div class="mini-stat-label">Pria</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-female"></i>
+                            <div class="mini-stat-value">2,100</div>
+                            <div class="mini-stat-label">Wanita</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-user-senior"></i>
+                            <div class="mini-stat-value">380</div>
+                            <div class="mini-stat-label">Lansia</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-baby"></i>
+                            <div class="mini-stat-value">520</div>
+                            <div class="mini-stat-label">Balita</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-wallet"></i>
+                            <div class="mini-stat-value">Rp 45 Jt</div>
+                            <div class="mini-stat-label">Kas RW</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-2 mb-3">
+                        <div class="mini-stat-card">
+                            <i class="fas fa-coins"></i>
+                            <div class="mini-stat-value">Rp 28 Jt</div>
+                            <div class="mini-stat-label">Kas RT</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts -->
+                <div class="row">
+                    <!-- Chart 1: Penduduk per RT -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Distribusi Penduduk per RT</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartDistribusiRT" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart 2: Demografi -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Demografi Penduduk</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartDemografi" style="max-height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Charts -->
+                <div class="row">
+                    <!-- Chart 3: Status Perkawinan -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Status Perkawinan</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartPerkawinan" style="max-height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chart 4: Kas RW Trend -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Trend Keuangan RW (6 Bulan Terakhir)</h5>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="chartKasRW" style="max-height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity & Pending Requests -->
+                <div class="row">
+                    <!-- Recent Activity -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Aktivitas Terbaru</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="activity-list">
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-primary">
+                                            <i class="fas fa-file-alt"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Pengajuan Surat Baru</div>
+                                            <div class="activity-time">5 menit yang lalu</div>
+                                        </div>
+                                        <div class="activity-badge badge bg-info">Baru</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-success">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Surat Disetujui</div>
+                                            <div class="activity-time">25 menit yang lalu</div>
+                                        </div>
+                                        <div class="activity-badge badge bg-success">Selesai</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-warning">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Pengaduan Keamanan Masuk</div>
+                                            <div class="activity-time">1 jam yang lalu</div>
+                                        </div>
+                                        <div class="activity-badge badge bg-warning">Proses</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-info">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Kegiatan Baru Dibuat</div>
+                                            <div class="activity-time">2 jam yang lalu</div>
+                                        </div>
+                                        <div class="activity-badge badge bg-info">Info</div>
+                                    </div>
+                                    <div class="activity-item">
+                                        <div class="activity-icon bg-danger">
+                                            <i class="fas fa-user-plus"></i>
+                                        </div>
+                                        <div class="activity-content">
+                                            <div class="activity-title">Penduduk Baru Terdaftar</div>
+                                            <div class="activity-time">3 jam yang lalu</div>
+                                        </div>
+                                        <div class="activity-badge badge bg-danger">New</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pending Requests -->
+                    <div class="col-lg-6 mb-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">Permintaan Menunggu</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="pending-list">
+                                    <div class="pending-item">
+                                        <div class="pending-header">
+                                            <div class="pending-title">Surat Pengantar Keterangan Domisili</div>
+                                            <span class="badge bg-warning">3</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 60%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pending-item">
+                                        <div class="pending-header">
+                                            <div class="pending-title">Pengajuan Surat Usaha</div>
+                                            <span class="badge bg-danger">2</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-danger" style="width: 40%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pending-item">
+                                        <div class="pending-header">
+                                            <div class="pending-title">Pengaduan Lingkungan</div>
+                                            <span class="badge bg-info">5</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="pending-item">
+                                        <div class="pending-header">
+                                            <div class="pending-title">Verifikasi UMKM Baru</div>
+                                            <span class="badge bg-success">1</span>
+                                        </div>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Admin JS -->
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>

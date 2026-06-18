@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Smart RW015 Taman Cikarang Indah 2 - Sistem Informasi RW Digital Terintegrasi">
+    <meta name="keywords" content="RW015, Taman Cikarang Indah 2, Smart Village, Sistem Informasi RW">
+    <meta name="author" content="Smart RW015">
+    <title>Smart RW015 - Taman Cikarang Indah 2</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">
+                <i class="fas fa-city text-primary"></i>
+                <span class="ms-2">Smart RW<span class="text-primary">015</span></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tentang">Tentang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#statistik">Statistik</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#agenda">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#layanan">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#umkm">UMKM</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#kontak">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-primary text-white ms-2" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO BANNER ===== -->
+    <section id="home" class="hero-banner">
+        <div class="container h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Digitalisasi Layanan <span class="text-primary">RW Terintegrasi</span>
+                    </h1>
+                    <p class="lead text-muted mb-4">
+                        Smart RW015 adalah sistem informasi digital yang menghubungkan seluruh warga dalam ekosistem RW yang modern, transparan, dan efisien.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="login.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt"></i> Masuk Sistem
+                        </a>
+                        <button class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#demoModal">
+                            <i class="fas fa-play"></i> Lihat Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000">
+                    <div class="hero-image">
+                        <div class="shape-container">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <i class="fas fa-city hero-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TENTANG RW015 ===== -->
+    <section id="tentang" class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5" data-aos="fade-up" data-aos-duration="800">
+                    <div class="about-image">
+                        <div class="about-box bg-primary"></div>
+                        <img src="assets/images/placeholder-about.jpg" alt="Tentang RW015" class="img-fluid rounded-3 shadow">
+                    </div>
+                </div>
+                <div class="col-lg-7 ps-lg-5" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <h2 class="display-5 fw-bold mb-4">
+                        Tentang <span class="text-primary">RW015</span>
+                    </h2>
+                    <p class="fs-5 text-muted mb-3">
+                        RW015 Taman Cikarang Indah 2 adalah sebuah rukun warga yang berlokasi di Kelurahan Taman Cikarang Indah 2, Kecamatan Cikarang, Kota Bekasi, Jawa Barat.
+                    </p>
+                    <p class="fs-5 text-muted mb-4">
+                        Dengan 7 RT dan ribuan warga, kami berkomitmen menciptakan lingkungan yang harmonis, aman, dan sejahtera melalui digitalisasi layanan dan peningkatan transparansi pengelolaan RW.
+                    </p>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <div class="feature-icon bg-primary bg-opacity-10">
+                                    <i class="fas fa-users text-primary"></i>
+                                </div>
+                                <h5 class="mt-3 fw-bold">Masyarakat Aktif</h5>
+                                <p class="text-muted small">Ribuan warga yang peduli dan aktif berpartisipasi</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <div class="feature-icon bg-success bg-opacity-10">
+                                    <i class="fas fa-leaf text-success"></i>
+                                </div>
+                                <h5 class="mt-3 fw-bold">Lingkungan Hijau</h5>
+                                <p class="text-muted small">Komitmen menjaga kebersihan dan keindahan lingkungan</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="btn btn-primary btn-lg">
+                        <i class="fas fa-arrow-right"></i> Pelajari Lebih Lanjut
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATISTIK DATA WARGA ===== -->
+    <section id="statistik" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Data Statistik <span class="text-primary">Warga RW015</span></h2>
+                <p class="lead text-muted">Informasi lengkap tentang demografi dan distribusi warga di RW015</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Total Warga -->
+                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-duration="800">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="4250">0</h3>
+                            <p class="stat-label">Total Warga</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Keluarga -->
+                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-success">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="980">0</h3>
+                            <p class="stat-label">Total Keluarga</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Rumah -->
+                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-warning">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="1050">0</h3>
+                            <p class="stat-label">Total Rumah</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jumlah RT -->
+                <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+                    <div class="stat-card">
+                        <div class="stat-icon bg-info">
+                            <i class="fas fa-map-pin"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-target="7">0</h3>
+                            <p class="stat-label">Jumlah RT</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribusi per RT -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-4">Distribusi Warga per RT</h5>
+                            <div class="rt-stats">
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT001</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 18%" data-width="18"></div>
+                                    </div>
+                                    <div class="rt-count">765</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT002</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 20%" data-width="20"></div>
+                                    </div>
+                                    <div class="rt-count">850</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT003</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 17%" data-width="17"></div>
+                                    </div>
+                                    <div class="rt-count">722</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT004</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 16%" data-width="16"></div>
+                                    </div>
+                                    <div class="rt-count">680</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT005</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 15%" data-width="15"></div>
+                                    </div>
+                                    <div class="rt-count">638</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT006</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 14%" data-width="14"></div>
+                                    </div>
+                                    <div class="rt-count">595</div>
+                                </div>
+                                <div class="rt-stat-item">
+                                    <div class="rt-name">RT007</div>
+                                    <div class="rt-bar-container">
+                                        <div class="rt-bar" style="width: 12%" data-width="12"></div>
+                                    </div>
+                                    <div class="rt-count">510</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AGENDA KEGIATAN ===== -->
+    <section id="agenda" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Agenda <span class="text-primary">Kegiatan Mendatang</span></h2>
+                <p class="lead text-muted">Jadwal kegiatan dan acara yang akan diadakan di RW015</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Agenda 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">15</span>
+                            <span class="date-month">Jul</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge bg-primary">Kerja Bakti</div>
+                            <h5 class="fw-bold mt-3 mb-2">Kerja Bakti Pembersihan Lingkungan</h5>
+                            <p class="text-muted small mb-3">Pembersihan jalan, taman, dan fasilitas umum RW015.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 08:00 - 11:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Lapangan RT001</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">22</span>
+                            <span class="date-month">Jul</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge" style="background-color: #198754;">Rapat Umum</div>
+                            <h5 class="fw-bold mt-3 mb-2">Rapat Umum Warga Bulanan</h5>
+                            <p class="text-muted small mb-3">Pembahasan program RW dan pertanyaan warga.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 19:00 - 21:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Balai RW015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">29</span>
+                            <span class="date-month">Jul</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge" style="background-color: #FF6B6B;">Sosial</div>
+                            <h5 class="fw-bold mt-3 mb-2">Program Pemberdayaan UMKM</h5>
+                            <p class="text-muted small mb-3">Pelatihan dan promosi UMKM warga RW015.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 10:00 - 14:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Balai RW015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">05</span>
+                            <span class="date-month">Agu</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge" style="background-color: #4ECDC4;">Kesehatan</div>
+                            <h5 class="fw-bold mt-3 mb-2">Posyandu & Vaksinasi Gratis</h5>
+                            <p class="text-muted small mb-3">Pelayanan kesehatan gratis untuk balita dan lansia.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 08:00 - 12:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Balai Kesehatan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">12</span>
+                            <span class="date-month">Agu</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge" style="background-color: #95E1D3;">Olahraga</div>
+                            <h5 class="fw-bold mt-3 mb-2">Turnamen Olahraga Antar RT</h5>
+                            <p class="text-muted small mb-3">Kompetisi futsal, bulu tangkis, dan voli antar RT.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 15:00 - 18:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Lapangan RW015</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agenda 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="agenda-card">
+                        <div class="agenda-date">
+                            <span class="date-day">19</span>
+                            <span class="date-month">Agu</span>
+                        </div>
+                        <div class="agenda-content">
+                            <div class="agenda-badge" style="background-color: #F38181;">Pelatihan</div>
+                            <h5 class="fw-bold mt-3 mb-2">Workshop Digitalisasi RW</h5>
+                            <p class="text-muted small mb-3">Edukasi penggunaan sistem informasi Smart RW015.</p>
+                            <div class="agenda-meta">
+                                <span class="me-3"><i class="far fa-clock text-primary"></i> 13:00 - 16:00</span>
+                                <span><i class="fas fa-map-pin text-success"></i> Ruang Pertemuan</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="800">
+                <a href="#" class="btn btn-primary btn-lg">
+                    <i class="fas fa-calendar-alt"></i> Lihat Semua Agenda
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PENGUMUMAN TERBARU ===== -->
+    <section id="pengumuman" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Pengumuman <span class="text-primary">Terbaru</span></h2>
+                <p class="lead text-muted">Update berita dan informasi penting dari pengelola RW</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Pengumuman 1 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800">
+                    <div class="pengumuman-card">
+                        <div class="pengumuman-badge bg-danger">Penting</div>
+                        <h5 class="fw-bold mt-3 mb-2">Pengingat Pembayaran Iuran Bulanan</h5>
+                        <p class="text-muted small mb-3">
+                            <i class="far fa-calendar"></i> 14 Juli 2024
+                        </p>
+                        <p class="mb-3">
+                            Diingatkan kepada seluruh warga RW015 untuk segera melunasi iuran bulanan bulan Juli. Pembayaran dapat dilakukan kepada bendahara RT masing-masing atau melalui aplikasi Smart RW015.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small fw-bold">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pengumuman 2 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="pengumuman-card">
+                        <div class="pengumuman-badge" style="background-color: #198754;">Kegiatan</div>
+                        <h5 class="fw-bold mt-3 mb-2">Undangan Pertemuan Pengurus RW</h5>
+                        <p class="text-muted small mb-3">
+                            <i class="far fa-calendar"></i> 12 Juli 2024
+                        </p>
+                        <p class="mb-3">
+                            Yth. Para pengurus RT dan anggota tim RW diundang menghadiri pertemuan pembahasan program kegiatan dan keuangan RW bulan Juli di Balai RW015.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small fw-bold">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pengumuman 3 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="pengumuman-card">
+                        <div class="pengumuman-badge" style="background-color: #0DCAF0;">Info</div>
+                        <h5 class="fw-bold mt-3 mb-2">Layanan Surat Online Sudah Aktif</h5>
+                        <p class="text-muted small mb-3">
+                            <i class="far fa-calendar"></i> 10 Juli 2024
+                        </p>
+                        <p class="mb-3">
+                            Sistem pelayanan surat pengantar online sudah aktif dan dapat diakses oleh seluruh warga RW015. Silakan login ke aplikasi Smart RW015 untuk mengajukan berbagai jenis surat.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small fw-bold">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Pengumuman 4 -->
+                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="pengumuman-card">
+                        <div class="pengumuman-badge" style="background-color: #FFC107;">Umum</div>
+                        <h5 class="fw-bold mt-3 mb-2">Pemeliharaan Jalan Raya Utama</h5>
+                        <p class="text-muted small mb-3">
+                            <i class="far fa-calendar"></i> 08 Juli 2024
+                        </p>
+                        <p class="mb-3">
+                            Akan dilakukan pemeliharaan dan perbaikan jalan raya utama RW015 pada minggu depan. Mohon perhatian khusus terhadap keselamatan anak-anak dan lalu lintas.
+                        </p>
+                        <a href="#" class="text-primary text-decoration-none small fw-bold">
+                            Baca Selengkapnya <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="800">
+                <a href="#" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-newspaper"></i> Lihat Semua Pengumuman
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LAYANAN SURAT ONLINE ===== -->
+    <section id="layanan" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Layanan <span class="text-primary">Surat Online</span></h2>
+                <p class="lead text-muted">Ajukan berbagai surat dengan mudah melalui sistem online</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Surat 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800">
+                    <div class="layanan-card">
+                        <div class="layanan-icon bg-primary">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Domisili</h5>
+                        <p class="text-muted small mb-3">Surat pengantar untuk keperluan administrasi umum.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge bg-primary bg-opacity-10 text-primary">
+                                <i class="far fa-clock"></i> 1 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-primary w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surat 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+                    <div class="layanan-card">
+                        <div class="layanan-icon" style="background-color: #198754;">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Usaha</h5>
+                        <p class="text-muted small mb-3">Untuk UMKM dan pelaku usaha kecil menengah.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge" style="background-color: #198754; background-opacity: 0.1; color: #198754;">
+                                <i class="far fa-clock"></i> 2 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-success w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surat 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
+                    <div class="layanan-card">
+                        <div class="layanan-icon bg-warning">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Tidak Mampu</h5>
+                        <p class="text-muted small mb-3">Untuk bantuan sosial dan beasiswa pendidikan.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge bg-warning bg-opacity-10 text-warning">
+                                <i class="far fa-clock"></i> 3 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-warning w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surat 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+                    <div class="layanan-card">
+                        <div class="layanan-icon bg-info">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Catatan Kepolisian</h5>
+                        <p class="text-muted small mb-3">Verifikasi catatan di Polsek setempat.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge bg-info bg-opacity-10 text-info">
+                                <i class="far fa-clock"></i> 5 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-info w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surat 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
+                    <div class="layanan-card">
+                        <div class="layanan-icon" style="background-color: #6F42C1;">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Pekerjaan</h5>
+                        <p class="text-muted small mb-3">Surat untuk keperluan lamaran kerja.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge" style="background-color: #6F42C1; opacity: 0.1; color: #6F42C1;">
+                                <i class="far fa-clock"></i> 1 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-secondary w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Surat 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500">
+                    <div class="layanan-card">
+                        <div class="layanan-icon" style="background-color: #E83E8C;">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-2">Surat Keterangan Untuk Pernikahan</h5>
+                        <p class="text-muted small mb-3">Surat pengantar pernikahan dan ijin resmi.</p>
+                        <div class="layanan-meta mb-3">
+                            <span class="badge" style="background-color: #E83E8C; opacity: 0.1; color: #E83E8C;">
+                                <i class="far fa-clock"></i> 3 hari
+                            </span>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline-secondary w-100">
+                            <i class="fas fa-arrow-right"></i> Ajukan Sekarang
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="alert alert-info border-0" role="alert">
+                        <div class="d-flex align-items-start">
+                            <i class="fas fa-info-circle me-3 mt-1 text-info"></i>
+                            <div>
+                                <strong>Info:</strong> Untuk mengajukan surat, Anda harus login terlebih dahulu. Proses verifikasi dilakukan oleh pengurus RT dan RW sesuai jadwal. Silakan cek status pengajuan Anda secara berkala.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== UMKM WARGA ===== -->
+    <section id="umkm" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">UMKM <span class="text-primary">Warga RW015</span></h2>
+                <p class="lead text-muted">Dukung ekonomi lokal dengan produk dan jasa dari warga RW015</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- UMKM 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-1.jpg" alt="Kue Homemade" class="img-fluid">
+                            <div class="umkm-badge">Makanan</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ms-2">4.8</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Kue Homemade Bu Sarah</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT002 - Bu Sarah
+                            </p>
+                            <p class="small text-muted mb-3">Kue dan roti fresh setiap hari dengan bahan berkualitas dan lezat.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMKM 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-2.jpg" alt="Jahitan Custom" class="img-fluid">
+                            <div class="umkm-badge" style="background-color: #198754;">Fashion</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="ms-2">4.5</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Jahitan Custom Budi</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT004 - Pak Budi
+                            </p>
+                            <p class="small text-muted mb-3">Layanan jahitan custom untuk berbagai kebutuhan pakaian.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMKM 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-3.jpg" alt="Toko Sayur Segar" class="img-fluid">
+                            <div class="umkm-badge" style="background-color: #28A745;">Pertanian</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="ms-2">5.0</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Sayur Segar Langsung dari Kebun</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT001 - Ibu Dewi
+                            </p>
+                            <p class="small text-muted mb-3">Sayuran segar organik tanpa pestisida berbahaya.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMKM 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-4.jpg" alt="Jasa Servis" class="img-fluid">
+                            <div class="umkm-badge" style="background-color: #0D6EFD;">Jasa</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <span class="ms-2">4.6</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Jasa Servis Elektronik</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT003 - Pak Hari
+                            </p>
+                            <p class="small text-muted mb-3">Servis AC, kulkas, TV dengan teknisi berpengalaman.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMKM 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-5.jpg" alt="Kursus Bahasa" class="img-fluid">
+                            <div class="umkm-badge" style="background-color: #6F42C1;">Edukasi</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ms-2">4.7</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Kursus Bahasa Inggris</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT005 - Ibu Lisa
+                            </p>
+                            <p class="small text-muted mb-3">Kursus Bahasa Inggris untuk anak dan dewasa.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- UMKM 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500">
+                    <div class="umkm-card">
+                        <div class="umkm-image">
+                            <img src="assets/images/placeholder-umkm-6.jpg" alt="Salon Kecantikan" class="img-fluid">
+                            <div class="umkm-badge" style="background-color: #E83E8C;">Kecantikan</div>
+                            <div class="umkm-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span class="ms-2">4.9</span>
+                            </div>
+                        </div>
+                        <div class="umkm-content">
+                            <h5 class="fw-bold mb-2">Salon Kecantikan Nisa</h5>
+                            <p class="text-muted small mb-2">
+                                <i class="fas fa-map-pin"></i> RT006 - Ibu Nisa
+                            </p>
+                            <p class="small text-muted mb-3">Layanan potong rambut, creambath, dan perawatan rambut.</p>
+                            <div class="d-flex gap-2">
+                                <a href="#" class="btn btn-sm btn-primary flex-grow-1">
+                                    <i class="fas fa-shopping-cart"></i> Pesan
+                                </a>
+                                <a href="#" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="800">
+                <a href="#" class="btn btn-primary btn-lg">
+                    <i class="fas fa-store"></i> Lihat Semua UMKM
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KONTAK PENGURUS RW ===== -->
+    <section id="kontak" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Kontak <span class="text-primary">Pengurus RW</span></h2>
+                <p class="lead text-muted">Hubungi pengurus RW015 untuk berbagai kebutuhan</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Pengurus 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Pak Sutrisno</h5>
+                        <p class="text-muted small mb-3">Ketua RW015</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567890" class="text-decoration-none">+62 812-3456-7890</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:ketua@rw015.id" class="text-decoration-none">ketua@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: Senin-Jumat 09:00-15:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengurus 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar" style="background-color: #198754;">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Ibu Siti Nurhaliza</h5>
+                        <p class="text-muted small mb-3">Bendahara RW015</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567891" class="text-decoration-none">+62 812-3456-7891</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:bendahara@rw015.id" class="text-decoration-none">bendahara@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: Selasa-Sabtu 08:00-14:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengurus 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar" style="background-color: #FFC107;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Pak Ahmad Wijaya</h5>
+                        <p class="text-muted small mb-3">Sekretaris RW015</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567892" class="text-decoration-none">+62 812-3456-7892</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:sekretaris@rw015.id" class="text-decoration-none">sekretaris@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: Senin-Sabtu 09:00-16:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengurus 4 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar bg-info">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Pak Hendra</h5>
+                        <p class="text-muted small mb-3">Koordinator Keamanan</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567893" class="text-decoration-none">+62 812-3456-7893</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:keamanan@rw015.id" class="text-decoration-none">keamanan@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: 24 Jam (Darurat)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengurus 5 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar" style="background-color: #6F42C1;">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Ibu Rina</h5>
+                        <p class="text-muted small mb-3">Koordinator Kebersihan</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567894" class="text-decoration-none">+62 812-3456-7894</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:kebersihan@rw015.id" class="text-decoration-none">kebersihan@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: Senin-Jumat 08:00-15:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pengurus 6 -->
+                <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500">
+                    <div class="kontak-card">
+                        <div class="kontak-avatar" style="background-color: #E83E8C;">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h5 class="fw-bold mt-3 mb-1">Ibu Dewi Lestari</h5>
+                        <p class="text-muted small mb-3">Koordinator Kesehatan</p>
+                        <div class="kontak-info">
+                            <p class="mb-2">
+                                <i class="fas fa-phone text-primary"></i>
+                                <a href="tel:+6281234567895" class="text-decoration-none">+62 812-3456-7895</a>
+                            </p>
+                            <p class="mb-2">
+                                <i class="fas fa-envelope text-success"></i>
+                                <a href="mailto:kesehatan@rw015.id" class="text-decoration-none">kesehatan@rw015.id</a>
+                            </p>
+                            <p>
+                                <i class="fas fa-clock text-warning"></i>
+                                Jam Kerja: Senin-Kamis 08:00-14:00
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Kontak -->
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="card border-0 shadow-lg">
+                        <div class="card-body p-5">
+                            <h5 class="card-title fw-bold mb-4">Kirim Pesan ke Pengurus RW</h5>
+                            <form id="formKontak">
+                                <div class="mb-3">
+                                    <label for="nama" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="nama" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="telepon" class="form-label">Telepon</label>
+                                    <input type="tel" class="form-control" id="telepon" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="subjek" class="form-label">Subjek</label>
+                                    <input type="text" class="form-control" id="subjek" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="pesan" class="form-label">Pesan</label>
+                                    <textarea class="form-control" id="pesan" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="fas fa-paper-plane"></i> Kirim Pesan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PETA LOKASI ===== -->
+    <section id="peta" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="display-5 fw-bold mb-3">Peta <span class="text-primary">Lokasi RW015</span></h2>
+                <p class="lead text-muted">Kantor RW dan lokasi penting lainnya</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.5486877765326!2d107.14944!3d-6.25!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698ffc71c0709f%3A0x0!2sTaman%20Cikarang%20Indah%202!5e0!3m2!1sid!2sid!4v1234567890" width="100%" height="500" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <h5 class="card-title fw-bold mb-4">Informasi Lokasi</h5>
+                            
+                            <div class="location-info mb-4">
+                                <h6 class="fw-bold mb-2">
+                                    <i class="fas fa-map-marker-alt text-primary"></i> Kantor RW015
+                                </h6>
+                                <p class="text-muted small mb-3">
+                                    Jl. Taman Cikarang Indah No. 15<br>
+                                    Kelurahan Taman Cikarang Indah 2<br>
+                                    Kecamatan Cikarang<br>
+                                    Kota Bekasi, 17530<br>
+                                    Jawa Barat, Indonesia
+                                </p>
+                            </div>
+
+                            <div class="location-info mb-4">
+                                <h6 class="fw-bold mb-2">
+                                    <i class="fas fa-phone text-success"></i> Hubungi Kami
+                                </h6>
+                                <p class="text-muted small mb-2">
+                                    <strong>Telepon:</strong><br>
+                                    <a href="tel:+62812" class="text-decoration-none">(+62) 812 3456 7890</a>
+                                </p>
+                                <p class="text-muted small">
+                                    <strong>Email:</strong><br>
+                                    <a href="mailto:info@rw015.id" class="text-decoration-none">info@rw015.id</a>
+                                </p>
+                            </div>
+
+                            <div class="location-info mb-4">
+                                <h6 class="fw-bold mb-2">
+                                    <i class="fas fa-clock text-warning"></i> Jam Operasional
+                                </h6>
+                                <p class="text-muted small">
+                                    <strong>Senin - Jumat:</strong> 08:00 - 16:00<br>
+                                    <strong>Sabtu:</strong> 09:00 - 14:00<br>
+                                    <strong>Minggu:</strong> Tutup
+                                </p>
+                            </div>
+
+                            <a href="https://goo.gl/maps/rw015" target="_blank" class="btn btn-primary w-100">
+                                <i class="fas fa-directions"></i> Lihat di Google Maps
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA (CALL TO ACTION) ===== -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8" data-aos="fade-up" data-aos-duration="800">
+                    <h2 class="display-5 fw-bold mb-3">Bergabunglah dengan Smart RW015</h2>
+                    <p class="fs-5 mb-0">
+                        Daftar sekarang untuk mengakses semua layanan digital RW015 dan stay connected dengan komunitas Anda.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-up" data-aos-duration="1000">
+                    <a href="register.html" class="btn btn-light btn-lg">
+                        <i class="fas fa-user-plus"></i> Daftar Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4 mb-5">
+                <!-- Tentang -->
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="fw-bold mb-3">
+                        <i class="fas fa-city text-primary"></i> Smart RW015
+                    </h6>
+                    <p class="small text-muted">
+                        Sistem Informasi Digital Terintegrasi untuk RW015 Taman Cikarang Indah 2.
+                    </p>
+                    <div class="social-links mt-3">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Menu -->
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="fw-bold mb-3">Menu</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-muted text-decoration-none small">Beranda</a></li>
+                        <li><a href="#tentang" class="text-muted text-decoration-none small">Tentang</a></li>
+                        <li><a href="#statistik" class="text-muted text-decoration-none small">Statistik</a></li>
+                        <li><a href="#agenda" class="text-muted text-decoration-none small">Agenda</a></li>
+                        <li><a href="#layanan" class="text-muted text-decoration-none small">Layanan</a></li>
+                        <li><a href="#umkm" class="text-muted text-decoration-none small">UMKM</a></li>
+                    </ul>
+                </div>
+
+                <!-- Layanan -->
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="fw-bold mb-3">Layanan</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted text-decoration-none small">Surat Pengantar</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none small">Pengaduan</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none small">Agenda Kegiatan</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none small">Direktori UMKM</a></li>
+                        <li><a href="#" class="text-muted text-decoration-none small">Laporan Keuangan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Hubungi -->
+                <div class="col-md-6 col-lg-3">
+                    <h6 class="fw-bold mb-3">Hubungi Kami</h6>
+                    <p class="small text-muted">
+                        <i class="fas fa-phone text-primary"></i>
+                        <a href="tel:+6281234567890" class="text-decoration-none text-muted">(+62) 812 3456 7890</a>
+                    </p>
+                    <p class="small text-muted">
+                        <i class="fas fa-envelope text-primary"></i>
+                        <a href="mailto:info@rw015.id" class="text-decoration-none text-muted">info@rw015.id</a>
+                    </p>
+                    <p class="small text-muted">
+                        <i class="fas fa-map-marker-alt text-primary"></i>
+                        Jl. Taman Cikarang Indah No. 15<br>
+                        Bekasi, Jawa Barat
+                    </p>
+                </div>
+            </div>
+
+            <hr class="bg-secondary">
+
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-muted mb-0">
+                        &copy; 2024 Smart RW015. All rights reserved.
+                    </p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="small text-muted text-decoration-none me-3">Privacy Policy</a>
+                    <a href="#" class="small text-muted text-decoration-none me-3">Terms of Service</a>
+                    <a href="#" class="small text-muted text-decoration-none">Contact Support</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== DEMO MODAL ===== -->
+    <div class="modal fade" id="demoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold">Demo Smart RW015</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%;">
+                        <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            title="Smart RW015 Demo" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

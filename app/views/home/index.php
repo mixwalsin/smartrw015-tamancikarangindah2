@@ -32,6 +32,7 @@
         <?php
         $layanan = [
             ['icon' => 'bi-people-fill',      'judul' => 'Administrasi Penduduk',  'deskripsi' => 'Data kependudukan warga RW015',          'url' => 'penduduk'],
+            ['icon' => 'bi-card-checklist',    'judul' => 'Kartu Keluarga',         'deskripsi' => 'Pengelolaan data KK dan anggota keluarga','url' => 'kartu-keluarga'],
             ['icon' => 'bi-envelope-fill',     'judul' => 'Surat Menyurat',         'deskripsi' => 'Pengajuan dan penerbitan surat resmi',    'url' => 'surat'],
             ['icon' => 'bi-cash-stack',        'judul' => 'Keuangan RW',            'deskripsi' => 'Transparansi kas dan laporan keuangan',   'url' => 'keuangan'],
             ['icon' => 'bi-megaphone-fill',    'judul' => 'Pengaduan Warga',        'deskripsi' => 'Sampaikan aspirasi dan pengaduan',        'url' => 'pengaduan'],

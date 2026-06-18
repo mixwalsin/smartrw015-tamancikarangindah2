@@ -120,16 +120,22 @@ class RbacService
             return self::$runtimeCache[$userId];
         }
 
-        // Gunakan cache session jika ada
-        if (isset($_SESSION['rbac_permissions'][$userId])) {
-            self::$runtimeCache[$userId] = $_SESSION['rbac_permissions'][$userId];
-            return self::$runtimeCache[$userId];
+        // Cek cache session + validasi TTL
+        $ttl       = defined('RBAC_CACHE_TTL') ? RBAC_CACHE_TTL : 300;
+        $cacheData = $_SESSION['rbac_permissions'][$userId] ?? null;
+        if ($cacheData !== null && $ttl > 0) {
+            $cachedAt = $_SESSION['rbac_permissions_at'][$userId] ?? 0;
+            if ((time() - $cachedAt) < $ttl) {
+                self::$runtimeCache[$userId] = $cacheData;
+                return $cacheData;
+            }
         }
 
         // Muat dari database
         $permissions = $this->loadPermissionsFromDb($userId);
-        $_SESSION['rbac_permissions'][$userId] = $permissions;
-        self::$runtimeCache[$userId] = $permissions;
+        $_SESSION['rbac_permissions'][$userId]    = $permissions;
+        $_SESSION['rbac_permissions_at'][$userId] = time();
+        self::$runtimeCache[$userId]              = $permissions;
 
         return $permissions;
     }
@@ -142,7 +148,10 @@ class RbacService
         if ($userId === null) {
             $userId = (int) (($_SESSION['user']['id'] ?? 0));
         }
-        unset($_SESSION['rbac_permissions'][$userId]);
+        unset(
+            $_SESSION['rbac_permissions'][$userId],
+            $_SESSION['rbac_permissions_at'][$userId]
+        );
         unset(self::$runtimeCache[$userId]);
     }
 

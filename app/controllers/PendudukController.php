@@ -98,7 +98,7 @@ class PendudukController extends Controller
     public function edit(string $id): void
     {
         $this->requireAuth();
-        $this->requirePermission('warga.create');
+        $this->requirePermission('warga.update');
         $penduduk = $this->model->find((int) $id);
         if (!$penduduk) {
             $this->redirect('penduduk');
@@ -112,7 +112,7 @@ class PendudukController extends Controller
     public function update(string $id): void
     {
         $this->requireAuth();
-        $this->requirePermission('warga.create');
+        $this->requirePermission('warga.update');
 
         if (!verifyCsrf()) {
             setFlash('error', 'Token keamanan tidak valid.');

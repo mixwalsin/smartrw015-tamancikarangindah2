@@ -33,11 +33,34 @@ class AuditLogModel extends Model
                 $modul,
                 $dataId,
                 $keterangan,
-                $_SERVER['REMOTE_ADDR']    ?? null,
+                $this->getClientIp(),
                 substr($_SERVER['HTTP_USER_AGENT'] ?? '', 0, 255),
                 date('Y-m-d H:i:s'),
             ]
         );
+    }
+
+    /**
+     * Ambil IP address klien dengan mempertimbangkan proxy headers.
+     * Validasi format IPv4/IPv6 untuk mencegah spoofing.
+     */
+    private function getClientIp(): ?string
+    {
+        $candidates = [
+            $_SERVER['HTTP_X_FORWARDED_FOR'] ?? '',
+            $_SERVER['HTTP_CLIENT_IP']        ?? '',
+            $_SERVER['REMOTE_ADDR']           ?? '',
+        ];
+
+        foreach ($candidates as $candidate) {
+            // X-Forwarded-For can contain multiple IPs; take the first one
+            $ip = trim(explode(',', $candidate)[0]);
+            if ($ip !== '' && filter_var($ip, FILTER_VALIDATE_IP)) {
+                return $ip;
+            }
+        }
+
+        return null;
     }
 
     /**

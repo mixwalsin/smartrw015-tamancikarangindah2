@@ -116,7 +116,7 @@
                             <i class="bi bi-person-circle me-1"></i><?= e($user['name']) ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><span class="dropdown-item-text text-muted small"><?= e($user['role_name'] ?? $user['role'] ?? '') ?></span></li>
+                            <li><span class="dropdown-item-text text-muted small"><?= e($user['role_name'] ?? ($user['role'] ? ucfirst(str_replace('_', ' ', $user['role'])) : 'Pengguna')) ?></span></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?= url('profil') ?>"><i class="bi bi-person me-1"></i>Profil</a></li>
                             <li><a class="dropdown-item text-danger" href="<?= url('auth/logout') ?>"><i class="bi bi-box-arrow-right me-1"></i>Keluar</a></li>

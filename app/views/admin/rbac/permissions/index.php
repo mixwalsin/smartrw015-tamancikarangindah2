@@ -75,8 +75,11 @@
 <script>
 document.querySelectorAll('.filter-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'btn-primary'));
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.add('btn-outline-secondary'));
+        const allBtns = document.querySelectorAll('.filter-btn');
+        allBtns.forEach(b => {
+            b.classList.remove('active', 'btn-primary');
+            b.classList.add('btn-outline-secondary');
+        });
         this.classList.add('active', 'btn-primary');
         this.classList.remove('btn-outline-secondary');
 

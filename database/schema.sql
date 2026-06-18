@@ -525,3 +525,37 @@ CREATE TABLE IF NOT EXISTS `log_aktivitas` (
   COMMENT='Audit trail aktivitas seluruh pengguna';
 
 SET FOREIGN_KEY_CHECKS = 1;
+
+-- ── 25. PENDUDUK (Modul Administrasi Penduduk) ─────────────
+-- Tabel utama untuk modul administrasi penduduk
+CREATE TABLE IF NOT EXISTS `penduduk` (
+    `id`             INT UNSIGNED    AUTO_INCREMENT PRIMARY KEY,
+    `nik`            VARCHAR(16)     NOT NULL COMMENT 'Nomor Induk Kependudukan',
+    `no_kk`          VARCHAR(16)     NULL     COMMENT 'Nomor Kartu Keluarga',
+    `nama`           VARCHAR(100)    NOT NULL,
+    `tempat_lahir`   VARCHAR(60)     NULL,
+    `tanggal_lahir`  DATE            NULL,
+    `jenis_kelamin`  ENUM('L','P')   NULL,
+    `agama`          ENUM('Islam','Kristen','Katolik','Hindu','Buddha','Konghucu') NULL,
+    `status_kawin`   ENUM('Belum Kawin','Kawin','Cerai Hidup','Cerai Mati') NULL,
+    `pendidikan`     ENUM('Tidak Sekolah','SD','SMP','SMA/SMK','D1','D2','D3','S1','S2','S3') NULL,
+    `pekerjaan`      VARCHAR(80)     NULL,
+    `alamat`         TEXT            NULL,
+    `rt`             VARCHAR(3)      NULL     COMMENT 'Nomor RT 001–015',
+    `rw`             VARCHAR(3)      NOT NULL DEFAULT '015' COMMENT 'RW015',
+    `no_rumah`       VARCHAR(20)     NULL,
+    `no_hp`          VARCHAR(20)     NULL,
+    `email`          VARCHAR(100)    NULL,
+    `status_tinggal` ENUM('Tetap','Pendatang','Pindah','Meninggal') NOT NULL DEFAULT 'Tetap',
+    `foto`           VARCHAR(255)    NULL,
+    `created_at`     DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`     DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uk_penduduk_nik`    (`nik`),
+    INDEX  `idx_penduduk_no_kk`    (`no_kk`),
+    INDEX  `idx_penduduk_rt`       (`rt`),
+    INDEX  `idx_penduduk_rw`       (`rw`),
+    INDEX  `idx_penduduk_nama`     (`nama`),
+    INDEX  `idx_penduduk_jk`       (`jenis_kelamin`),
+    INDEX  `idx_penduduk_status`   (`status_tinggal`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Data administrasi penduduk RW015';

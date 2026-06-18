@@ -41,6 +41,12 @@ $router->get('/penduduk/show/:id', 'PendudukController@show');
 $router->get('/penduduk/edit/:id', 'PendudukController@edit');
 $router->post('/penduduk/update/:id', 'PendudukController@update');
 $router->post('/penduduk/delete/:id', 'PendudukController@delete');
+// Import / Export
+$router->get('/penduduk/import', 'PendudukController@import');
+$router->post('/penduduk/import/process', 'PendudukController@processImport');
+$router->get('/penduduk/import/template', 'PendudukController@importTemplate');
+$router->get('/penduduk/export/excel', 'PendudukController@exportExcel');
+$router->get('/penduduk/export/pdf', 'PendudukController@exportPdf');
 
 // ──────────────────────────────────────────
 // Surat Menyurat

@@ -179,15 +179,51 @@ INSERT INTO `pengajuan_surat`
 (2, 9,'Mengurus beasiswa anak','diproses',NULL,NULL),
 (3, 4,'Keperluan perizinan usaha warung','pending',NULL,NULL);
 
+-- ── pengaduan_kategori ───────────────────────────────────
+INSERT INTO `pengaduan_kategori` (`id`,`name`,`slug`,`description`,`warna`,`icon`) VALUES
+(1,'Keamanan','keamanan','Masalah keamanan lingkungan, kehilangan, dan tindak kriminal.','#dc3545','bi-shield-exclamation'),
+(2,'Kebersihan','kebersihan','Masalah sampah, TPS, dan kebersihan area publik.','#198754','bi-trash3'),
+(3,'Infrastruktur','infrastruktur','Jalan, drainase, lampu jalan, dan sarana umum lainnya.','#0d6efd','bi-cone-striped'),
+(4,'Lingkungan','lingkungan','Isu penghijauan, polusi, dan keberlanjutan lingkungan.','#20c997','bi-tree'),
+(5,'Layanan RW','layanan-rw','Keluhan layanan administrasi dan operasional RW.','#6f42c1','bi-building');
+
 -- ── pengaduan ──────────────────────────────────────────────
 INSERT INTO `pengaduan`
-(`warga_id`,`kategori`,`judul`,`isi`,`status`) VALUES
-(6,'Infrastruktur','Jalan RT003 berlubang',
- 'Jalan di depan gang 3 RT003 berlubang cukup dalam dan berbahaya bagi pengendara motor.','baru'),
-(9,'Kebersihan','Sampah menumpuk di TPS RT005',
- 'TPS di ujung gang belum diangkut sejak 3 hari lalu, bau tidak sedap.','diproses'),
-(11,'Keamanan','Lampu jalan mati RT007',
- 'Lampu jalan di ujung gang RT007 sudah mati seminggu lebih, rawan kejahatan di malam hari.','baru');
+(`id`,`user_id`,`kategori_id`,`no_tiket`,`judul`,`deskripsi`,`lokasi`,`status`,`prioritas`,`sla_target_at`,`created_at`,`updated_at`) VALUES
+(1,4,3,'PGD-202606-0001','Jalan RT003 berlubang',
+ 'Jalan di depan gang 3 RT003 berlubang cukup dalam dan berbahaya bagi pengendara motor.',
+ 'Gang 3 RT003','diproses_rt','tinggi','2026-06-25 09:00:00','2026-06-18 08:00:00','2026-06-18 10:00:00'),
+(2,5,2,'PGD-202606-0002','Sampah menumpuk di TPS RT005',
+ 'TPS di ujung gang belum diangkut sejak 3 hari lalu, bau tidak sedap dan mengundang lalat.',
+ 'TPS RT005','diproses_rw','sedang','2026-06-22 09:00:00','2026-06-17 07:30:00','2026-06-18 09:15:00'),
+(3,2,1,'PGD-202606-0003','Lampu jalan mati RT007',
+ 'Lampu jalan di ujung gang RT007 sudah mati lebih dari seminggu, rawan kejahatan di malam hari.',
+ 'Ujung gang RT007 dekat taman','diterima','darurat','2026-06-19 07:00:00','2026-06-18 06:45:00','2026-06-18 06:45:00');
+
+INSERT INTO `pengaduan_foto` (`pengaduan_id`,`foto_path`,`created_at`) VALUES
+(1,'pengaduan/sample-jalan-rt003.jpg','2026-06-18 08:05:00'),
+(2,'pengaduan/sample-tps-rt005.png','2026-06-17 07:35:00'),
+(3,'pengaduan/sample-lampu-rt007.jpg','2026-06-18 06:50:00');
+
+INSERT INTO `pengaduan_komentar` (`pengaduan_id`,`user_id`,`komentar`,`created_at`,`updated_at`) VALUES
+(1,4,'Mohon segera diperbaiki karena sudah ada warga yang hampir terjatuh.','2026-06-18 08:10:00','2026-06-18 08:10:00'),
+(1,3,'RT sudah menjadwalkan survey lapangan siang ini.','2026-06-18 09:15:00','2026-06-18 09:15:00'),
+(2,2,'Mohon diprioritaskan karena sudah mengganggu kesehatan warga sekitar.','2026-06-17 07:40:00','2026-06-17 07:40:00');
+
+INSERT INTO `pengaduan_disposisi_rt` (`pengaduan_id`,`rt_id`,`catatan`,`jadwal_penanganan`,`petugas_id`,`created_at`) VALUES
+(1,3,'Akan dilakukan verifikasi lapangan dan koordinasi dengan petugas lingkungan.','2026-06-18 14:00:00',3,'2026-06-18 09:00:00'),
+(2,3,'Masalah berulang dan membutuhkan dukungan armada dari RW.','2026-06-18 10:00:00',NULL,'2026-06-18 08:30:00');
+
+INSERT INTO `pengaduan_disposisi_rw` (`pengaduan_id`,`rw_id`,`catatan`,`keputusan`,`alokasi_budget`,`departemen`,`created_at`) VALUES
+(2,2,'Disetujui untuk penambahan armada angkut sampah dan pengawasan TPS.','approve',750000.00,'Kebersihan Lingkungan','2026-06-18 09:00:00');
+
+INSERT INTO `pengaduan_status_history` (`pengaduan_id`,`status_lama`,`status_baru`,`keterangan`,`changed_by`,`changed_at`) VALUES
+(1,NULL,'diterima','Pengaduan dibuat oleh warga.',4,'2026-06-18 08:00:00'),
+(1,'diterima','diproses_rt','RT memverifikasi laporan dan menyiapkan survey. ',3,'2026-06-18 09:00:00'),
+(2,NULL,'diterima','Pengaduan dibuat oleh warga.',5,'2026-06-17 07:30:00'),
+(2,'diterima','diproses_rt','RT menerima laporan dan meminta tindak lanjut. ',3,'2026-06-18 08:30:00'),
+(2,'diproses_rt','diproses_rw','Diteruskan ke RW untuk dukungan sumber daya. ',2,'2026-06-18 09:00:00'),
+(3,NULL,'diterima','Pengaduan dibuat oleh warga.',2,'2026-06-18 06:45:00');
 
 -- ── kegiatan ───────────────────────────────────────────────
 INSERT INTO `kegiatan`

@@ -62,8 +62,14 @@ class AuthController extends Controller
             'name'     => $user['name'],
             'username' => $user['username'],
             'email'    => $user['email'],
-            'role'     => $user['role'],
+            'role'     => $user['role'] ?? $user['slug'] ?? '',
+            'role_id'  => $user['role_id'] ?? null,
+            'warga_id' => $user['warga_id'] ?? null,
         ];
+
+        if (!empty($user['role_name']) && empty($_SESSION['user']['role'])) {
+            $_SESSION['user']['role'] = $user['role_name'];
+        }
 
         $this->userModel->updateLastLogin((int) $user['id']);
 

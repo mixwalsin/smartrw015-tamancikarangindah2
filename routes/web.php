@@ -69,6 +69,17 @@ $router->get('/pengaduan/create', 'PengaduanController@create');
 $router->post('/pengaduan/store', 'PengaduanController@store');
 $router->get('/pengaduan/show/:id', 'PengaduanController@show');
 $router->post('/pengaduan/update-status/:id', 'PengaduanController@updateStatus');
+$router->post('/pengaduan/comment/:id', 'PengaduanKomentarController@store');
+$router->post('/pengaduan/comment/update/:id', 'PengaduanKomentarController@update');
+$router->post('/pengaduan/comment/delete/:id', 'PengaduanKomentarController@delete');
+$router->post('/pengaduan/disposisi-rt/:id', 'DisposisiController@storeRt');
+$router->post('/pengaduan/disposisi-rw/:id', 'DisposisiController@storeRw');
+$router->post('/pengaduan/foto/upload/:id', 'FotoController@store');
+$router->post('/pengaduan/foto/delete/:id', 'FotoController@delete');
+$router->get('/pengaduan/foto/download/:id', 'FotoController@download');
+$router->get('/pengaduan/report', 'ReportController@index');
+$router->get('/pengaduan/export/excel', 'ReportController@exportExcel');
+$router->get('/pengaduan/export/pdf/:id', 'ReportController@exportPdf');
 
 // ──────────────────────────────────────────
 // Kegiatan / Event
@@ -133,4 +144,4 @@ $router->post('/admin/users/delete/:id', 'Admin\UserController@delete');
 // API (JSON responses)
 // ──────────────────────────────────────────
 $router->get('/api/statistik', 'Api\StatistikController@index');
-$router->get('/api/pengaduan', 'Api\PengaduanController@index');
+$router->get('/api/pengaduan', 'ApiPengaduanController@index');

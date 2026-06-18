@@ -114,6 +114,56 @@ function authUser(): ?array
     return $_SESSION['user'] ?? null;
 }
 
+/**
+ * Check if current user has a specific permission
+ */
+function can(string $permission): bool
+{
+    static $rbac = null;
+    if ($rbac === null) {
+        require_once APP_PATH . '/core/RbacService.php';
+        $rbac = new RbacService();
+    }
+    return $rbac->can($permission);
+}
+
+/**
+ * Check if current user has any of the given permissions
+ */
+function canAny(array $permissions): bool
+{
+    foreach ($permissions as $perm) {
+        if (can($perm)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * Check if current user has a specific role (slug)
+ */
+function hasRole(string $roleSlug): bool
+{
+    return (($_SESSION['user']['role'] ?? '') === $roleSlug);
+}
+
+/**
+ * Check if current user has any of the given roles
+ */
+function hasAnyRole(array $roles): bool
+{
+    return in_array($_SESSION['user']['role'] ?? '', $roles, true);
+}
+
+/**
+ * Check if current user is Super Admin
+ */
+function isSuperAdmin(): bool
+{
+    return hasRole('super_admin');
+}
+
 // ──────────────────────────────────────────
 // String / Format Helpers
 // ──────────────────────────────────────────

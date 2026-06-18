@@ -43,7 +43,7 @@ class DashboardController extends Controller
     public function rw(): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw');
+        $this->requireRole('super_admin', 'ketua_rw', 'sekretaris_rw', 'bendahara_rw');
         $this->view('dashboard/rw', [
             'title' => 'Dashboard RW - ' . APP_NAME,
         ]);
@@ -52,7 +52,7 @@ class DashboardController extends Controller
     public function rt(): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw', 'rt');
+        $this->requireRole('super_admin', 'ketua_rw', 'sekretaris_rw', 'bendahara_rw', 'ketua_rt', 'admin_rt');
         $this->view('dashboard/rt', [
             'title' => 'Dashboard RT - ' . APP_NAME,
         ]);

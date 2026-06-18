@@ -130,6 +130,39 @@ $router->post('/admin/users/update/:id', 'Admin\UserController@update');
 $router->post('/admin/users/delete/:id', 'Admin\UserController@delete');
 
 // ──────────────────────────────────────────
+// RBAC – Role Management
+// ──────────────────────────────────────────
+$router->get('/admin/roles', 'Admin\RoleController@index');
+$router->get('/admin/roles/create', 'Admin\RoleController@create');
+$router->post('/admin/roles/store', 'Admin\RoleController@store');
+$router->get('/admin/roles/edit/:id', 'Admin\RoleController@edit');
+$router->post('/admin/roles/update/:id', 'Admin\RoleController@update');
+$router->post('/admin/roles/delete/:id', 'Admin\RoleController@delete');
+$router->get('/admin/roles/permissions/:id', 'Admin\RoleController@permissions');
+$router->post('/admin/roles/sync-permissions/:id', 'Admin\RoleController@syncPermissions');
+
+// ──────────────────────────────────────────
+// RBAC – Permission Management
+// ──────────────────────────────────────────
+$router->get('/admin/permissions', 'Admin\PermissionController@index');
+$router->get('/admin/permissions/create', 'Admin\PermissionController@create');
+$router->post('/admin/permissions/store', 'Admin\PermissionController@store');
+$router->get('/admin/permissions/edit/:id', 'Admin\PermissionController@edit');
+$router->post('/admin/permissions/update/:id', 'Admin\PermissionController@update');
+$router->post('/admin/permissions/delete/:id', 'Admin\PermissionController@delete');
+
+// ──────────────────────────────────────────
+// RBAC – Assign Role ke User
+// ──────────────────────────────────────────
+$router->get('/admin/user-roles', 'Admin\UserRoleController@index');
+$router->post('/admin/user-roles/assign/:id', 'Admin\UserRoleController@assign');
+
+// ──────────────────────────────────────────
+// RBAC – Audit Log
+// ──────────────────────────────────────────
+$router->get('/admin/audit-log', 'Admin\AuditLogController@index');
+
+// ──────────────────────────────────────────
 // API (JSON responses)
 // ──────────────────────────────────────────
 $router->get('/api/statistik', 'Api\StatistikController@index');

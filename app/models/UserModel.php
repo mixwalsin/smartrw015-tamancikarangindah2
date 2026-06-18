@@ -13,14 +13,52 @@ class UserModel extends Model
 {
     protected string $table = 'users';
 
+    /**
+     * SQL base untuk JOIN dengan roles.
+     */
+    private function baseSelect(): string
+    {
+        return "SELECT u.*, r.slug AS role_slug, r.name AS role_name
+                FROM users u
+                LEFT JOIN roles r ON r.id = u.role_id";
+    }
+
     public function findByUsername(string $username): array|false
     {
-        return $this->findWhere('username', $username);
+        $stmt = $this->db->prepare(
+            $this->baseSelect() . " WHERE u.username = ? LIMIT 1"
+        );
+        $stmt->execute([$username]);
+        $row = $stmt->fetch();
+        if ($row) {
+            $row['role'] = $row['role_slug'] ?? '';
+        }
+        return $row;
     }
 
     public function findByEmail(string $email): array|false
     {
-        return $this->findWhere('email', $email);
+        $stmt = $this->db->prepare(
+            $this->baseSelect() . " WHERE u.email = ? LIMIT 1"
+        );
+        $stmt->execute([$email]);
+        $row = $stmt->fetch();
+        if ($row) {
+            $row['role'] = $row['role_slug'] ?? '';
+        }
+        return $row;
+    }
+
+    /**
+     * Ambil semua user beserta nama role.
+     */
+    public function allWithRole(string $orderBy = 'u.name', string $direction = 'ASC'): array
+    {
+        $stmt = $this->db->prepare(
+            $this->baseSelect() . " ORDER BY {$orderBy} {$direction}"
+        );
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function updateLastLogin(int $id): bool

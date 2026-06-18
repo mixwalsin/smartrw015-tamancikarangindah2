@@ -113,8 +113,90 @@ abstract class Controller
         $userRole = $_SESSION['user']['role'] ?? '';
         if (!in_array($userRole, $roles, true)) {
             http_response_code(403);
-            $this->view('errors/403', ['message' => 'Akses ditolak.']);
+            $this->view('errors/403', ['message' => 'Anda tidak memiliki akses ke halaman ini.']);
             exit;
         }
+    }
+
+    /**
+     * Require a specific permission
+     */
+    protected function requirePermission(string $permission): void
+    {
+        $this->requireAuth();
+        if (!$this->can($permission)) {
+            http_response_code(403);
+            $this->view('errors/403', [
+                'message' => "Anda tidak memiliki izin: {$permission}.",
+            ]);
+            exit;
+        }
+    }
+
+    /**
+     * Require any of the given permissions
+     */
+    protected function requireAnyPermission(array $permissions): void
+    {
+        $this->requireAuth();
+        foreach ($permissions as $perm) {
+            if ($this->can($perm)) {
+                return;
+            }
+        }
+        http_response_code(403);
+        $this->view('errors/403', ['message' => 'Anda tidak memiliki izin yang diperlukan.']);
+        exit;
+    }
+
+    /**
+     * Check if current user has a specific permission
+     */
+    protected function can(string $permission): bool
+    {
+        static $rbac = null;
+        if ($rbac === null) {
+            require_once APP_PATH . '/core/RbacService.php';
+            $rbac = new RbacService();
+        }
+        return $rbac->can($permission);
+    }
+
+    /**
+     * Check if current user has a specific role
+     */
+    protected function hasRole(string $role): bool
+    {
+        return ($this->currentUser()['role'] ?? '') === $role;
+    }
+
+    /**
+     * Check if current user has any of the given roles
+     */
+    protected function hasAnyRole(array $roles): bool
+    {
+        return in_array($this->currentUser()['role'] ?? '', $roles, true);
+    }
+
+    /**
+     * Get current logged-in user data
+     */
+    protected function currentUser(): array
+    {
+        return $_SESSION['user'] ?? [];
+    }
+
+    /**
+     * Log an activity to audit trail
+     */
+    protected function logActivity(
+        string $aksi,
+        string $modul,
+        ?int   $dataId     = null,
+        string $keterangan = ''
+    ): void {
+        require_once APP_PATH . '/models/AuditLogModel.php';
+        $userId = (int) ($_SESSION['user']['id'] ?? 0);
+        (new AuditLogModel())->log($userId ?: null, $aksi, $modul, $dataId, $keterangan);
     }
 }

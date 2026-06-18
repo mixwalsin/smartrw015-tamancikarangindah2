@@ -452,10 +452,10 @@ class SuratController extends Controller
         $isiSurat = $this->renderTemplate($pengajuan);
 
         $this->view('surat/print', [
-            'title'     => 'Cetak Surat - ' . APP_NAME,
-            'pengajuan' => $pengajuan,
-            'isiSurat'  => $isiSurat,
-            'verifyUrl' => url('surat/verify/' . $pengajuan['kode_verifikasi']),
+            'title'        => 'Cetak Surat - ' . APP_NAME,
+            'pengajuan'    => $pengajuan,
+            'penutupSurat' => $this->renderPenutupParagraf($pengajuan),
+            'verifyUrl'    => url('surat/verify/' . $pengajuan['kode_verifikasi']),
         ], null); // no layout for print
     }
 
@@ -510,21 +510,60 @@ class SuratController extends Controller
         $jk = $pengajuan['pemohon_jk'] === 'L' ? 'Laki-laki' : ($pengajuan['pemohon_jk'] === 'P' ? 'Perempuan' : '-');
 
         $placeholders = [
-            '{nama}'         => $pengajuan['pemohon_nama']        ?? '-',
-            '{nik}'          => $pengajuan['pemohon_nik']         ?? '-',
-            '{tempat_lahir}' => $pengajuan['pemohon_tempat_lahir'] ?? '-',
-            '{tgl_lahir}'    => $pengajuan['pemohon_tgl_lahir']
-                                 ? formatDate($pengajuan['pemohon_tgl_lahir'])
-                                 : '-',
+            '{nama}'          => $pengajuan['pemohon_nama']         ?? '-',
+            '{nik}'           => $pengajuan['pemohon_nik']          ?? '-',
+            '{tempat_lahir}'  => $pengajuan['pemohon_tempat_lahir'] ?? '-',
+            '{tgl_lahir}'     => $pengajuan['pemohon_tgl_lahir']
+                                  ? formatDate($pengajuan['pemohon_tgl_lahir'])
+                                  : '-',
             '{jenis_kelamin}' => $jk,
-            '{agama}'        => $pengajuan['pemohon_agama']       ?? '-',
-            '{pekerjaan}'    => $pengajuan['pemohon_pekerjaan']   ?? '-',
-            '{alamat}'       => $pengajuan['pemohon_alamat']      ?? '-',
-            '{rt}'           => $pengajuan['pemohon_rt']          ?? '-',
-            '{keperluan}'    => $pengajuan['keperluan']            ?? '-',
-            '{no_surat}'     => $pengajuan['no_surat']            ?? '-',
+            '{agama}'         => $pengajuan['pemohon_agama']        ?? '-',
+            '{pekerjaan}'     => $pengajuan['pemohon_pekerjaan']    ?? '-',
+            '{alamat}'        => $pengajuan['pemohon_alamat']       ?? '-',
+            '{rt}'            => $pengajuan['pemohon_rt']           ?? '-',
+            '{keperluan}'     => $pengajuan['keperluan']            ?? '-',
+            '{no_surat}'      => $pengajuan['no_surat']             ?? '-',
         ];
 
         return strtr($template, $placeholders);
+    }
+
+    /**
+     * Extract the closing paragraph(s) from the template for the print view.
+     * The closing section starts at the first statement line (after the data block).
+     */
+    private function renderPenutupParagraf(array $pengajuan): string
+    {
+        $rendered = $this->renderTemplate($pengajuan);
+        if ($rendered === '') {
+            return 'Benar-benar warga yang berdomisili di wilayah RT '
+                . ($pengajuan['pemohon_rt'] ?? '-') . '/RW015 Taman Cikarang Indah 2.'
+                . "\n\nKeperluan: " . ($pengajuan['keperluan'] ?? '-');
+        }
+
+        // The template lines that contain personal data end with the Alamat line.
+        // Lines starting with "Benar-" or "Surat " begin the closing paragraph section.
+        $lines     = explode("\n", $rendered);
+        $closingKeywords = ['Benar-', 'Surat keterangan', 'Surat pengantar'];
+        $penutup   = [];
+        $inClosing = false;
+
+        foreach ($lines as $line) {
+            if (!$inClosing) {
+                foreach ($closingKeywords as $keyword) {
+                    if (str_starts_with(ltrim($line), $keyword)) {
+                        $inClosing = true;
+                        break;
+                    }
+                }
+            }
+            if ($inClosing) {
+                $penutup[] = $line;
+            }
+        }
+
+        return $penutup
+            ? implode("\n", $penutup)
+            : 'Keperluan: ' . ($pengajuan['keperluan'] ?? '-');
     }
 }

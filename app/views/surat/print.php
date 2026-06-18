@@ -202,30 +202,7 @@
 
         <!-- ISI SURAT -->
         <div class="penutup">
-            <?php
-            // Render isi surat dari template (sudah disiapkan controller)
-            if (!empty($isiSurat)):
-                // Hanya ambil bagian setelah baris alamat (setelah data pemohon)
-                $lines = explode("\n", $isiSurat);
-                $afterData = false;
-                $penutupLines = [];
-                foreach ($lines as $line) {
-                    if (!$afterData && (strpos($line, 'berdomisili') !== false || strpos($line, 'warga RT') !== false || strpos($line, 'menjalankan usaha') !== false || strpos($line, 'warga tidak mampu') !== false || strpos($line, 'telah lahir') !== false || strpos($line, 'telah meninggal') !== false)) {
-                        $afterData = true;
-                    }
-                    if ($afterData) {
-                        $penutupLines[] = $line;
-                    }
-                }
-                if (!empty($penutupLines)) {
-                    echo nl2br(e(implode("\n", $penutupLines)));
-                }
-            ?>
-            <?php else: ?>
-                Benar-benar warga yang berdomisili di wilayah RT <?= e($pengajuan['pemohon_rt']) ?>/RW015
-                Taman Cikarang Indah 2.<br><br>
-                <strong>Keperluan:</strong> <?= nl2br(e($pengajuan['keperluan'])) ?>
-            <?php endif; ?>
+            <?= nl2br(e($penutupSurat)) ?>
         </div>
 
         <div class="penutup" style="margin-top:15px;">

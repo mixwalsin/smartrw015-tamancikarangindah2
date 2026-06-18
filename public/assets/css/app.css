@@ -1,0 +1,97 @@
+/*
+ * Smart RW015 Taman Cikarang Indah 2
+ * Custom Styles - Bootstrap 5 Override
+ */
+
+/* ── Body & Layout ── */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+main {
+    flex: 1;
+}
+
+/* ── Navbar ── */
+.navbar-brand {
+    font-size: 1.1rem;
+    letter-spacing: 0.01em;
+}
+
+/* ── Cards ── */
+.card {
+    border-radius: 0.75rem;
+}
+
+.card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ── Tables ── */
+.table th {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #6c757d;
+}
+
+/* ── Buttons ── */
+.btn {
+    border-radius: 0.5rem;
+}
+
+/* ── Badges ── */
+.badge {
+    font-size: 0.78rem;
+    padding: 0.35em 0.65em;
+}
+
+/* ── Sidebar (future use) ── */
+.sidebar {
+    width: 240px;
+    min-height: 100vh;
+    background: #fff;
+    border-right: 1px solid #e9ecef;
+}
+
+/* ── Stat Cards ── */
+.stat-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+/* ── Flash alerts ── */
+.alert {
+    border-radius: 0.6rem;
+    border: none;
+}
+
+/* ── Pagination ── */
+.page-link {
+    border-radius: 0.4rem !important;
+    margin: 0 2px;
+    border: 1px solid #dee2e6;
+}
+
+/* ── Responsive ── */
+@media (max-width: 576px) {
+    .display-5 {
+        font-size: 1.8rem;
+    }
+}

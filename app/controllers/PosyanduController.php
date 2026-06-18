@@ -561,16 +561,16 @@ class PosyanduController extends Controller
 
         // Hitung status gizi otomatis
         $balita     = $this->balitaModel->find($balitaId);
-        $usiaBulan  = 0;
         $statusGizi = $this->input('status_gizi', 'gizi_baik');
 
         if ($balita) {
             $tglLahir  = new \DateTime($balita['tgl_lahir']);
             $sekarang  = new \DateTime();
-            $usiaBulan = (int) $tglLahir->diff($sekarang)->days / 30;
+            $diff      = $tglLahir->diff($sekarang);
+            $usiaBulan = $diff->y * 12 + $diff->m;
             $statusGizi = TimbanganModel::hitungStatusGizi(
                 $berat,
-                (int) $usiaBulan,
+                $usiaBulan,
                 $balita['jenis_kelamin']
             );
         }

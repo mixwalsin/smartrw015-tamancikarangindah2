@@ -124,7 +124,9 @@
     </div>
 
     <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Note: Add integrity SRI hash once verified: https://www.srihash.org/ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"
+            crossorigin="anonymous"></script>
     <script>
     (function () {
         const labels  = <?= $labels ?>;

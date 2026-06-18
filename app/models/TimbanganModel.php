@@ -72,13 +72,21 @@ class TimbanganModel extends Model
     }
 
     /**
-     * Hitung status gizi berdasarkan berat badan (BB/U)
-     * Standar WHO sederhana berdasarkan Z-score
+     * Hitung status gizi berdasarkan berat badan (BB/U) menggunakan Z-score WHO.
+     *
+     * Konstanta ESTIMATED_SD_PERCENTAGE (12% dari median) adalah pendekatan sederhana.
+     * Untuk produksi, gunakan tabel SD penuh dari WHO child growth standards.
+     *
+     * @param float  $beratBadan   Berat badan dalam kg
+     * @param int    $usiaBulan    Usia dalam bulan
+     * @param string $jenisKelamin 'L' (laki-laki) atau 'P' (perempuan)
      */
-    public static function hitungStatusGizi(float $beratBadan, int $usiabulan, string $jenisKelamin): string
+    private const ESTIMATED_SD_PERCENTAGE = 0.12;
+
+    public static function hitungStatusGizi(float $beratBadan, int $usiaBulan, string $jenisKelamin): string
     {
-        // Median BB/U WHO (nilai perkiraan sederhana untuk skrining)
-        // Ini adalah referensi sederhana; untuk produksi gunakan tabel lengkap WHO
+        // Median BB/U WHO (nilai perkiraan sederhana untuk skrining awal)
+        // Untuk produksi, gunakan tabel lengkap WHO Child Growth Standards
         $medianBBU = [
             // [laki-laki_median, perempuan_median]
             0  => [3.3,  3.2],
@@ -105,14 +113,14 @@ class TimbanganModel extends Model
         $keys = array_keys($medianBBU);
         $closest = $keys[0];
         foreach ($keys as $k) {
-            if (abs($k - $usiabulan) < abs($closest - $usiabulan)) {
+            if (abs($k - $usiaBulan) < abs($closest - $usiaBulan)) {
                 $closest = $k;
             }
         }
 
         $colIdx = ($jenisKelamin === 'L') ? 0 : 1;
         $median = $medianBBU[$closest][$colIdx];
-        $sd     = $median * 0.12; // perkiraan SD ±12% dari median
+        $sd     = $median * self::ESTIMATED_SD_PERCENTAGE;
 
         $zscore = ($beratBadan - $median) / $sd;
 

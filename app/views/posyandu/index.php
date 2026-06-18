@@ -128,7 +128,7 @@
                                 <?= formatDate($j['tanggal']) ?> &bull;
                                 <?= substr($j['jam_mulai'], 0, 5) ?>&ndash;<?= substr($j['jam_selesai'], 0, 5) ?>
                             </small>
-                            <?php if ($j['keterangan'] !== ''): ?>
+                            <?php if (!empty($j['keterangan'])): ?>
                                 <div class="text-muted small"><?= e($j['keterangan']) ?></div>
                             <?php endif; ?>
                         </div>

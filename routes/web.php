@@ -101,11 +101,23 @@ $router->post('/posyandu/store', 'PosyanduController@store');
 $router->get('/posyandu/show/:id', 'PosyanduController@show');
 
 // ──────────────────────────────────────────
-// Keamanan / Security
+// Security
 // ──────────────────────────────────────────
-$router->get('/keamanan', 'KeamananController@index');
-$router->get('/keamanan/create', 'KeamananController@create');
-$router->post('/keamanan/store', 'KeamananController@store');
+$router->get('/security', 'SecurityController@index');
+$router->get('/security/tamu', 'SecurityController@tamu');
+$router->post('/security/tamu/store', 'SecurityController@storeTamu');
+$router->post('/security/tamu/checkout/:id', 'SecurityController@checkoutTamu');
+$router->get('/security/kendaraan', 'SecurityController@kendaraan');
+$router->post('/security/kendaraan/store', 'SecurityController@storeKendaraan');
+$router->post('/security/kendaraan/checkout/:id', 'SecurityController@checkoutKendaraan');
+$router->get('/security/insiden', 'SecurityController@insiden');
+$router->post('/security/insiden/store', 'SecurityController@storeInsiden');
+$router->post('/security/insiden/update-status/:id', 'SecurityController@updateInsidenStatus');
+$router->get('/security/patroli', 'SecurityController@patroli');
+$router->post('/security/patroli/store', 'SecurityController@storePatroli');
+$router->get('/security/qr-pass', 'SecurityController@qrPass');
+$router->get('/security/check-in-out', 'SecurityController@checkInOut');
+$router->get('/security/laporan', 'SecurityController@laporan');
 
 // ──────────────────────────────────────────
 // Statistik

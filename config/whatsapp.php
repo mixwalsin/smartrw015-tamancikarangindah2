@@ -13,6 +13,7 @@ define('WA_GATEWAY_ENABLED', filter_var($waEnabled !== false ? $waEnabled : 'fal
 
 define('WA_GATEWAY_ENDPOINT', (string) (getenv('WA_GATEWAY_ENDPOINT') ?: ''));
 define('WA_GATEWAY_TIMEOUT', (int) (getenv('WA_GATEWAY_TIMEOUT') ?: 15));
+define('WA_GATEWAY_CONNECT_TIMEOUT', (int) (getenv('WA_GATEWAY_CONNECT_TIMEOUT') ?: 5));
 define('WA_GATEWAY_AUTH_HEADER', (string) (getenv('WA_GATEWAY_AUTH_HEADER') ?: 'Authorization'));
 define('WA_GATEWAY_AUTH_SCHEME', (string) (getenv('WA_GATEWAY_AUTH_SCHEME') ?: 'Bearer'));
 define('WA_GATEWAY_API_KEY', (string) (getenv('WA_GATEWAY_API_KEY') ?: ''));
@@ -29,6 +30,8 @@ if ($waExtraPayloadRaw !== false && $waExtraPayloadRaw !== '') {
     $decoded = json_decode($waExtraPayloadRaw, true);
     if (is_array($decoded)) {
         $waExtraPayload = $decoded;
+    } else {
+        trigger_error('WA_GATEWAY_EXTRA_PAYLOAD bukan JSON object yang valid.', E_USER_WARNING);
     }
 }
 define('WA_GATEWAY_EXTRA_PAYLOAD', $waExtraPayload);

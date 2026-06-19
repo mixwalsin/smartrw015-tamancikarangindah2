@@ -63,7 +63,7 @@ class WhatsAppGatewayClient
             CURLOPT_HTTPHEADER => $headers,
             CURLOPT_POSTFIELDS => json_encode($payload, JSON_UNESCAPED_UNICODE),
             CURLOPT_TIMEOUT => WA_GATEWAY_TIMEOUT,
-            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_CONNECTTIMEOUT => WA_GATEWAY_CONNECT_TIMEOUT,
         ]);
 
         $responseBody = curl_exec($ch);

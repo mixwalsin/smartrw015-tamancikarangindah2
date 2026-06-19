@@ -116,6 +116,13 @@ class WhatsappNotificationController extends Controller
         if (stripos($contentType, 'application/json') !== false) {
             $raw = file_get_contents('php://input');
             $decoded = json_decode($raw ?: '[]', true);
+            if (($raw ?? '') !== '' && json_last_error() !== JSON_ERROR_NONE) {
+                $this->json([
+                    'success' => false,
+                    'message' => 'Format JSON tidak valid.',
+                ], 400);
+            }
+
             if (is_array($decoded)) {
                 $payload = $decoded;
             }

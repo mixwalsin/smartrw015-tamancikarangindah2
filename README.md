@@ -34,6 +34,7 @@ Konfigurasi gateway diambil dari environment variable (lihat `config/whatsapp.ph
 - `WA_GATEWAY_AUTH_HEADER` (default: `Authorization`)
 - `WA_GATEWAY_AUTH_SCHEME` (default: `Bearer`)
 - `WA_GATEWAY_TIMEOUT` (default: 15 detik)
+- `WA_GATEWAY_CONNECT_TIMEOUT` (default: 5 detik)
 - `WA_GATEWAY_RECIPIENT_FIELD` (default: `phone`)
 - `WA_GATEWAY_MESSAGE_FIELD` (default: `message`)
 - `WA_GATEWAY_METADATA_FIELD` (default: `metadata`)

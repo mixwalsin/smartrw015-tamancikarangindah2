@@ -7,6 +7,8 @@ require_once APP_PATH . '/models/LaporanModel.php';
 
 class LaporanController extends Controller
 {
+    private const PDF_MAX_LINES = 52;
+
     private LaporanModel $laporanModel;
 
     public function __construct()
@@ -59,7 +61,7 @@ class LaporanController extends Controller
         $label = $moduleOptions[$selectedModule] ?? ucfirst($selectedModule);
 
         if ($format === 'excel') {
-            $this->exportExcel($label, $rows, $filters);
+            $this->exportCsv($label, $rows, $filters);
             return;
         }
 
@@ -76,7 +78,7 @@ class LaporanController extends Controller
         ];
     }
 
-    private function exportExcel(string $label, array $rows, array $filters): never
+    private function exportCsv(string $label, array $rows, array $filters): never
     {
         $fileName = 'laporan-' . strtolower(str_replace(' ', '-', $label)) . '-' . date('Ymd-His') . '.csv';
 
@@ -142,7 +144,7 @@ class LaporanController extends Controller
                     $values[] = mb_substr($text, 0, 30);
                 }
                 $lines[] = implode(' | ', $values);
-                if (count($lines) >= 52) {
+                if (count($lines) >= self::PDF_MAX_LINES) {
                     $lines[] = '... data dipotong, gunakan export Excel untuk data lengkap.';
                     break;
                 }

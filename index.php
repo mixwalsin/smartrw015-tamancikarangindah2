@@ -33,6 +33,7 @@ spl_autoload_register(function (string $class): void {
 
 // Load config
 require_once CONFIG_PATH . '/config.php';
+require_once CONFIG_PATH . '/whatsapp.php';
 require_once CONFIG_PATH . '/database.php';
 
 // Load helpers

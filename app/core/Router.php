@@ -11,25 +11,16 @@ class Router
 {
     private array $routes = [];
 
-    /**
-     * Register a GET route
-     */
     public function get(string $path, string|array|callable $handler): void
     {
         $this->addRoute('GET', $path, $handler);
     }
 
-    /**
-     * Register a POST route
-     */
     public function post(string $path, string|array|callable $handler): void
     {
         $this->addRoute('POST', $path, $handler);
     }
 
-    /**
-     * Register a route for all methods
-     */
     public function any(string $path, string|array|callable $handler): void
     {
         $this->addRoute('ANY', $path, $handler);
@@ -44,9 +35,6 @@ class Router
         ];
     }
 
-    /**
-     * Dispatch the current request
-     */
     public function dispatch(): void
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
@@ -64,23 +52,17 @@ class Router
             }
         }
 
-        // No route found → 404
         $this->handleNotFound();
     }
 
-    /**
-     * Get the clean URI from the request
-     */
     private function parseUri(): string
     {
-        // Support both mod_rewrite (REQUEST_URI) and query string (?url=)
         if (isset($_GET['url'])) {
-            $uri = trim($_GET['url'], '/');
+            $uri = trim((string) $_GET['url'], '/');
         } else {
             $requestUri = $_SERVER['REQUEST_URI'] ?? '/';
-            $basePath   = str_replace($_SERVER['DOCUMENT_ROOT'], '', BASE_PATH);
+            $basePath   = str_replace($_SERVER['DOCUMENT_ROOT'] ?? '', '', BASE_PATH);
             $uri        = trim(parse_url($requestUri, PHP_URL_PATH) ?? '/', '/');
-            // Strip base path prefix
             $baseUri    = trim($basePath, '/');
             if ($baseUri !== '' && str_starts_with($uri, $baseUri)) {
                 $uri = trim(substr($uri, strlen($baseUri)), '/');
@@ -90,13 +72,8 @@ class Router
         return $uri === '' ? '/' : '/' . $uri;
     }
 
-    /**
-     * Match a route pattern against the URI, extract named params.
-     * Returns array of params or null if no match.
-     */
     private function matchRoute(string $pattern, string $uri): ?array
     {
-        // Convert :param to named capture groups
         $regex = preg_replace('/\/:([a-zA-Z_][a-zA-Z0-9_]*)/', '/(?P<$1>[^/]+)', $pattern);
         $regex = '#^' . $regex . '$#';
 
@@ -104,13 +81,9 @@ class Router
             return null;
         }
 
-        // Keep only named params
-        return array_filter($matches, fn($k) => !is_int($k), ARRAY_FILTER_USE_KEY);
+        return array_filter($matches, static fn ($key) => !is_int($key), ARRAY_FILTER_USE_KEY);
     }
 
-    /**
-     * Call the route handler (Controller@method, [Controller, method], or callable)
-     */
     private function callHandler(string|array|callable $handler, array $params): void
     {
         if (is_callable($handler)) {
@@ -127,11 +100,12 @@ class Router
             return;
         }
 
-        $controllerFile = APP_PATH . '/controllers/' . $class . '.php';
+        $controllerFile = APP_PATH . '/controllers/' . str_replace('\\', '/', $class) . '.php';
         if (!file_exists($controllerFile)) {
             $this->handleNotFound();
             return;
         }
+
         require_once $controllerFile;
 
         if (!class_exists($class)) {
@@ -154,8 +128,9 @@ class Router
         $viewFile = APP_PATH . '/views/errors/404.php';
         if (file_exists($viewFile)) {
             require $viewFile;
-        } else {
-            echo '<h1>404 - Halaman tidak ditemukan</h1>';
+            return;
         }
+
+        echo '<h1>404 - Halaman tidak ditemukan</h1>';
     }
 }

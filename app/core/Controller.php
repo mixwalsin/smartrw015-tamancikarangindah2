@@ -9,16 +9,8 @@ declare(strict_types=1);
 
 abstract class Controller
 {
-    /**
-     * Render a view with optional layout
-     *
-     * @param string $view   Path relative to app/views/ (e.g. 'home/index')
-     * @param array  $data   Variables to extract into the view
-     * @param string|null $layout  Layout file relative to app/views/layouts/ (null = no layout)
-     */
     protected function view(string $view, array $data = [], ?string $layout = 'main'): void
     {
-        // Make data available as variables
         extract($data, EXTR_SKIP);
 
         $viewFile = APP_PATH . '/views/' . $view . '.php';
@@ -34,12 +26,10 @@ abstract class Controller
 
         $layoutFile = APP_PATH . '/views/layouts/' . $layout . '.php';
         if (!file_exists($layoutFile)) {
-            // Fallback to no layout
             require $viewFile;
             return;
         }
 
-        // Buffer content view
         ob_start();
         require $viewFile;
         $content = ob_get_clean();
@@ -47,9 +37,6 @@ abstract class Controller
         require $layoutFile;
     }
 
-    /**
-     * Redirect to a URL
-     */
     protected function redirect(string $url): never
     {
         if (!str_starts_with($url, 'http')) {
@@ -59,9 +46,6 @@ abstract class Controller
         exit;
     }
 
-    /**
-     * Return JSON response
-     */
     protected function json(mixed $data, int $statusCode = 200): never
     {
         http_response_code($statusCode);
@@ -70,33 +54,21 @@ abstract class Controller
         exit;
     }
 
-    /**
-     * Check if request is POST
-     */
     protected function isPost(): bool
     {
-        return $_SERVER['REQUEST_METHOD'] === 'POST';
+        return ($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST';
     }
 
-    /**
-     * Get POST input with optional default
-     */
     protected function input(string $key, mixed $default = null): mixed
     {
         return $_POST[$key] ?? $default;
     }
 
-    /**
-     * Get GET param with optional default
-     */
     protected function query(string $key, mixed $default = null): mixed
     {
         return $_GET[$key] ?? $default;
     }
 
-    /**
-     * Require authentication; redirect to login if not logged in
-     */
     protected function requireAuth(): void
     {
         if (empty($_SESSION['user'])) {
@@ -104,9 +76,6 @@ abstract class Controller
         }
     }
 
-    /**
-     * Require a specific role
-     */
     protected function requireRole(string ...$roles): void
     {
         $this->requireAuth();
@@ -116,5 +85,30 @@ abstract class Controller
             $this->view('errors/403', ['message' => 'Akses ditolak.']);
             exit;
         }
+    }
+
+    protected function requirePermission(string $permission): void
+    {
+        $this->requireAuth();
+        if (!authCan($permission)) {
+            http_response_code(403);
+            $this->view('errors/403', ['message' => 'Anda tidak memiliki izin untuk mengakses fitur ini.']);
+            exit;
+        }
+    }
+
+    protected function renderModuleIndex(array $data): void
+    {
+        $this->view('shared/module_index', $data);
+    }
+
+    protected function renderModuleForm(array $data): void
+    {
+        $this->view('shared/module_form', $data);
+    }
+
+    protected function renderModuleShow(array $data): void
+    {
+        $this->view('shared/module_show', $data);
     }
 }

@@ -12,13 +12,14 @@ require_once APP_PATH . '/models/PendudukModel.php';
 require_once APP_PATH . '/models/PengaduanModel.php';
 require_once APP_PATH . '/models/KegiatanModel.php';
 require_once APP_PATH . '/models/KeuanganModel.php';
+require_once APP_PATH . '/models/NotificationModel.php';
 
 class DashboardController extends Controller
 {
-    private PendudukModel  $pendudukModel;
+    private PendudukModel $pendudukModel;
     private PengaduanModel $pengaduanModel;
-    private KegiatanModel  $kegiatanModel;
-    private KeuanganModel  $keuanganModel;
+    private KegiatanModel $kegiatanModel;
+    private KeuanganModel $keuanganModel;
 
     public function __construct()
     {
@@ -32,11 +33,12 @@ class DashboardController extends Controller
     {
         $this->requireAuth();
         $this->view('dashboard/index', [
-            'title'            => 'Dashboard - ' . APP_NAME,
-            'totalPenduduk'    => $this->pendudukModel->count(),
-            'totalPengaduan'   => $this->pengaduanModel->count(),
-            'kegiatanTerbaru'  => $this->kegiatanModel->terbaru(5),
-            'ringkasanKeuangan'=> $this->keuanganModel->ringkasanBulanIni(),
+            'title'             => 'Dashboard - ' . APP_NAME,
+            'totalPenduduk'     => $this->pendudukModel->count(),
+            'totalPengaduan'    => $this->pengaduanModel->count(),
+            'kegiatanTerbaru'   => $this->kegiatanModel->terbaru(5),
+            'ringkasanKeuangan' => $this->keuanganModel->ringkasanBulanIni(),
+            'notifikasi'        => notificationItems(),
         ]);
     }
 
@@ -45,7 +47,12 @@ class DashboardController extends Controller
         $this->requireAuth();
         $this->requireRole('admin', 'rw');
         $this->view('dashboard/rw', [
-            'title' => 'Dashboard RW - ' . APP_NAME,
+            'title'           => 'Dashboard RW - ' . APP_NAME,
+            'totalPenduduk'   => $this->pendudukModel->count(),
+            'totalPengaduan'  => $this->pengaduanModel->count(),
+            'saldoKasRw'      => $this->keuanganModel->saldoKasRw(),
+            'saldoKasRt'      => $this->keuanganModel->saldoKasRt(),
+            'kegiatanTerbaru' => $this->kegiatanModel->terbaru(6),
         ]);
     }
 
@@ -54,7 +61,10 @@ class DashboardController extends Controller
         $this->requireAuth();
         $this->requireRole('admin', 'rw', 'rt');
         $this->view('dashboard/rt', [
-            'title' => 'Dashboard RT - ' . APP_NAME,
+            'title'          => 'Dashboard RT - ' . APP_NAME,
+            'totalPenduduk'  => $this->pendudukModel->count(),
+            'totalPengaduan' => count($this->pengaduanModel->getByStatus('baru')),
+            'kegiatan'       => $this->kegiatanModel->mendatang(),
         ]);
     }
 }

@@ -36,15 +36,15 @@ class AuthController extends Controller
             $this->redirect('auth/login');
         }
 
-        $username = trim($this->input('username', ''));
-        $password = $this->input('password', '');
+        $username = trim((string) $this->input('username', ''));
+        $password = (string) $this->input('password', '');
 
         if ($username === '' || $password === '') {
             setFlash('error', 'Username dan password wajib diisi.');
             $this->redirect('auth/login');
         }
 
-        $user = $this->userModel->findByUsername($username);
+        $user = $this->userModel->findAuthUserByUsername($username);
 
         if (!$user || !password_verify($password, $user['password'])) {
             setFlash('error', 'Username atau password salah.');
@@ -56,16 +56,20 @@ class AuthController extends Controller
             $this->redirect('auth/login');
         }
 
-        // Set session
+        session_regenerate_id(true);
         $_SESSION['user'] = [
-            'id'       => $user['id'],
-            'name'     => $user['name'],
-            'username' => $user['username'],
-            'email'    => $user['email'],
-            'role'     => $user['role'],
+            'id'          => (int) $user['id'],
+            'warga_id'    => $user['warga_id'] !== null ? (int) $user['warga_id'] : null,
+            'name'        => $user['name'],
+            'username'    => $user['username'],
+            'email'       => $user['email'],
+            'role'        => $user['role_slug'],
+            'role_name'   => $user['role_name'],
+            'permissions' => $this->userModel->getPermissions((int) $user['id'], (int) $user['role_id']),
         ];
 
         $this->userModel->updateLastLogin((int) $user['id']);
+        logActivity('login', 'auth', (int) $user['id'], 'Pengguna berhasil login');
 
         setFlash('success', 'Selamat datang, ' . e($user['name']) . '!');
         $this->redirect('dashboard');
@@ -73,7 +77,12 @@ class AuthController extends Controller
 
     public function logout(): void
     {
+        logActivity('logout', 'auth', authUser()['id'] ?? null, 'Pengguna logout');
         $_SESSION = [];
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'] ?? '', (bool) $params['secure'], (bool) $params['httponly']);
+        }
         session_destroy();
         $this->redirect('auth/login');
     }
@@ -92,14 +101,19 @@ class AuthController extends Controller
             $this->redirect('auth/register');
         }
 
-        $name     = trim($this->input('name', ''));
-        $username = trim($this->input('username', ''));
-        $email    = trim($this->input('email', ''));
-        $password = $this->input('password', '');
-        $confirm  = $this->input('password_confirmation', '');
+        $name     = trim((string) $this->input('name', ''));
+        $username = trim((string) $this->input('username', ''));
+        $email    = trim((string) $this->input('email', ''));
+        $password = (string) $this->input('password', '');
+        $confirm  = (string) $this->input('password_confirmation', '');
 
         if ($name === '' || $username === '' || $email === '' || $password === '') {
             setFlash('error', 'Semua kolom wajib diisi.');
+            $this->redirect('auth/register');
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            setFlash('error', 'Format email tidak valid.');
             $this->redirect('auth/register');
         }
 
@@ -123,15 +137,15 @@ class AuthController extends Controller
             $this->redirect('auth/register');
         }
 
-        $this->userModel->insert([
+        $id = $this->userModel->registerWarga([
             'name'      => $name,
             'username'  => $username,
             'email'     => $email,
             'password'  => password_hash($password, PASSWORD_BCRYPT),
-            'role'      => 'warga',
-            'is_active' => 0, // Perlu aktivasi admin
+            'is_active' => 0,
         ]);
 
+        logActivity('register', 'users', (int) $id, 'Registrasi akun warga baru');
         setFlash('success', 'Pendaftaran berhasil. Tunggu aktivasi dari administrator.');
         $this->redirect('auth/login');
     }

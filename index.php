@@ -15,7 +15,6 @@ define('CONFIG_PATH', BASE_PATH . '/config');
 define('PUBLIC_PATH', BASE_PATH . '/public');
 define('STORAGE_PATH', BASE_PATH . '/storage');
 
-// Autoload
 spl_autoload_register(function (string $class): void {
     $paths = [
         APP_PATH . '/core/' . $class . '.php',
@@ -31,14 +30,13 @@ spl_autoload_register(function (string $class): void {
     }
 });
 
-// Load config
 require_once CONFIG_PATH . '/config.php';
 require_once CONFIG_PATH . '/database.php';
 
-// Load helpers
+$GLOBALS['whatsapp_config'] = require CONFIG_PATH . '/whatsapp.php';
+
 require_once APP_PATH . '/helpers/functions.php';
 
-// Dispatch
 $router = new Router();
 require_once BASE_PATH . '/routes/web.php';
 $router->dispatch();

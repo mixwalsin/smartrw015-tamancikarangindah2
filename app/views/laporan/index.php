@@ -48,10 +48,9 @@
                 </div>
                 <div class="col-md-2">
                     <label class="form-label mb-1">Bulan</label>
-                    <?php $bulanList = [1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April', 5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus', 9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember']; ?>
                     <select name="bulan" class="form-select">
                         <option value="0">Semua</option>
-                        <?php foreach ($bulanList as $angkaBulan => $namaBulan): ?>
+                        <?php foreach (($monthOptions ?? []) as $angkaBulan => $namaBulan): ?>
                             <option value="<?= $angkaBulan ?>" <?= (int) $filters['bulan'] === $angkaBulan ? 'selected' : '' ?>><?= $namaBulan ?></option>
                         <?php endforeach; ?>
                     </select>

@@ -21,6 +21,7 @@ class LaporanModel extends Model
 
     private array $tableExistsCache = [];
     private array $columnExistsCache = [];
+    private array $firstColumnCache = [];
 
     public function moduleOptions(): array
     {
@@ -199,7 +200,7 @@ class LaporanModel extends Model
 
     private function dateColumn(string $table): ?string
     {
-        foreach (['tanggal', 'created_at', 'tanggal_lahir'] as $column) {
+        foreach (['tanggal', 'created_at'] as $column) {
             if ($this->columnExists($table, $column)) {
                 return $column;
             }
@@ -214,6 +215,20 @@ class LaporanModel extends Model
                 return "`{$column}`";
             }
         }
-        return '`id`';
+        $firstColumn = $this->firstColumn($table);
+        return $firstColumn !== null ? "`{$firstColumn}`" : '(SELECT 1)';
+    }
+
+    private function firstColumn(string $table): ?string
+    {
+        if (array_key_exists($table, $this->firstColumnCache)) {
+            return $this->firstColumnCache[$table];
+        }
+
+        $stmt = $this->db->query("SHOW COLUMNS FROM `{$table}`");
+        $row = $stmt->fetch();
+        $column = is_array($row) ? ($row['Field'] ?? null) : null;
+        $this->firstColumnCache[$table] = is_string($column) ? $column : null;
+        return $this->firstColumnCache[$table];
     }
 }

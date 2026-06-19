@@ -7,6 +7,7 @@ require_once APP_PATH . '/models/LaporanModel.php';
 
 class LaporanController extends Controller
 {
+    // Batas baris untuk menjaga konten tetap muat pada satu halaman PDF A4.
     private const PDF_MAX_LINES = 52;
 
     private LaporanModel $laporanModel;
@@ -29,6 +30,11 @@ class LaporanController extends Controller
         $filters = $this->filtersFromRequest();
         $rows = $this->laporanModel->reportRows($selectedModule, $filters);
         $summary = $this->laporanModel->summary($filters);
+        $monthOptions = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember',
+        ];
 
         $this->view('laporan/index', [
             'title'          => 'Laporan - ' . APP_NAME,
@@ -38,6 +44,7 @@ class LaporanController extends Controller
             'rows'           => $rows,
             'summary'        => $summary,
             'filters'        => $filters,
+            'monthOptions'   => $monthOptions,
         ]);
     }
 

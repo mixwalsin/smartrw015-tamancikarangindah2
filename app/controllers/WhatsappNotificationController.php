@@ -51,6 +51,7 @@ class WhatsappNotificationController extends Controller
                 'success' => false,
                 'message' => 'Akses tidak diizinkan.',
             ], 401);
+            return;
         }
 
         $payload = $this->getPayload();
@@ -61,6 +62,7 @@ class WhatsappNotificationController extends Controller
                 'success' => false,
                 'message' => 'Field phone/no_hp wajib diisi.',
             ], 422);
+            return;
         }
 
         $data = $payload['data'] ?? [];
@@ -89,6 +91,7 @@ class WhatsappNotificationController extends Controller
                     'success' => false,
                     'message' => 'Jenis notifikasi tidak didukung.',
                 ], 400);
+                return;
         }
 
         $statusCode = ($result['success'] ?? false) ? 200 : 500;

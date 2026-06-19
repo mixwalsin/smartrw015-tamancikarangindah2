@@ -57,7 +57,7 @@ class PendudukController extends Controller
             'tanggal_lahir' => (string) $this->input('tanggal_lahir', ''),
             'jenis_kelamin' => (string) $this->input('jenis_kelamin', ''),
             'alamat'        => trim((string) $this->input('alamat', '')),
-            'rt'            => str_pad((string) $this->input('rt', ''), 3, '0', STR_PAD_LEFT),
+            'rt'            => $this->normalizeRtCode((string) $this->input('rt', '')),
             'status_kawin'  => (string) $this->input('status_kawin', ''),
             'agama'         => (string) $this->input('agama', ''),
             'pekerjaan'     => trim((string) $this->input('pekerjaan', '')),
@@ -79,7 +79,8 @@ class PendudukController extends Controller
             logActivity('create', 'warga', (int) $id, 'Menambah data penduduk baru');
             setFlash('success', 'Data penduduk berhasil ditambahkan.');
         } catch (Throwable $e) {
-            setFlash('error', 'Gagal menyimpan data penduduk: ' . $e->getMessage());
+            error_log('Gagal menyimpan data penduduk: ' . $e->getMessage());
+            setFlash('error', 'Gagal menyimpan data penduduk. Silakan periksa kembali data yang diinput.');
         }
 
         $this->redirect('penduduk');
@@ -167,7 +168,7 @@ class PendudukController extends Controller
             'tanggal_lahir' => (string) $this->input('tanggal_lahir', ''),
             'jenis_kelamin' => (string) $this->input('jenis_kelamin', ''),
             'alamat'        => trim((string) $this->input('alamat', '')),
-            'rt'            => str_pad((string) $this->input('rt', ''), 3, '0', STR_PAD_LEFT),
+            'rt'            => $this->normalizeRtCode((string) $this->input('rt', '')),
             'status_kawin'  => (string) $this->input('status_kawin', ''),
             'agama'         => (string) $this->input('agama', ''),
             'pekerjaan'     => trim((string) $this->input('pekerjaan', '')),
@@ -179,7 +180,8 @@ class PendudukController extends Controller
             logActivity('update', 'warga', (int) $id, 'Memperbarui data penduduk');
             setFlash('success', 'Data penduduk berhasil diperbarui.');
         } catch (Throwable $e) {
-            setFlash('error', 'Gagal memperbarui data penduduk: ' . $e->getMessage());
+            error_log('Gagal memperbarui data penduduk: ' . $e->getMessage());
+            setFlash('error', 'Gagal memperbarui data penduduk. Silakan coba lagi atau hubungi administrator.');
         }
 
         $this->redirect('penduduk');
@@ -199,5 +201,10 @@ class PendudukController extends Controller
         logActivity('delete', 'warga', (int) $id, 'Menghapus data penduduk');
         setFlash('success', 'Data penduduk berhasil dihapus.');
         $this->redirect('penduduk');
+    }
+
+    private function normalizeRtCode(string $rt): string
+    {
+        return str_pad($rt, 3, '0', STR_PAD_LEFT);
     }
 }

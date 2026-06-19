@@ -11,9 +11,9 @@ class KartuKeluargaController extends SimpleCrudController
             'title' => 'Kartu Keluarga',
             'icon' => 'bi-card-list',
             'route' => 'kk',
-            'select_sql' => 'SELECT kk.id, kk.no_kk, kk.alamat, kk.rt_text, rt.kode AS rt, rw.kode AS rw FROM kk kk LEFT JOIN rt rt ON rt.id = kk.rt_id LEFT JOIN rw rw ON rw.id = rt.rw_id',
-            'count_sql' => 'SELECT COUNT(*) FROM kk kk LEFT JOIN rt rt ON rt.id = kk.rt_id',
-            'search_columns' => ['kk.no_kk', 'kk.alamat', 'kk.rt_text'],
+            'select_sql' => 'SELECT base.id, base.no_kk, base.alamat, base.rt_text, rt.kode AS rt, rw.kode AS rw FROM kk base LEFT JOIN rt rt ON rt.id = base.rt_id LEFT JOIN rw rw ON rw.id = rt.rw_id',
+            'count_sql' => 'SELECT COUNT(*) FROM kk base LEFT JOIN rt rt ON rt.id = base.rt_id',
+            'search_columns' => ['base.no_kk', 'base.alamat', 'base.rt_text'],
             'columns' => [
                 ['key' => 'no_kk', 'label' => 'No. KK'],
                 ['key' => 'rt', 'label' => 'RT'],

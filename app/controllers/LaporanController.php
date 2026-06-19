@@ -50,6 +50,9 @@ class LaporanController extends Controller
         header('Content-Disposition: attachment; filename="laporan-' . $module . '-' . date('Ymd-His') . '.csv"');
         $output = fopen('php://output', 'wb');
         if ($output === false) {
+            error_log('Gagal membuka php://output untuk ekspor laporan ' . $module);
+            http_response_code(500);
+            echo 'Gagal menyiapkan file laporan.';
             exit;
         }
         if ($rows !== []) {

@@ -107,7 +107,7 @@ class LaporanController extends Controller
             fputcsv($output, array_keys($rows[0]));
             foreach ($rows as $row) {
                 $line = array_map(
-                    static fn($value) => is_scalar($value) || $value === null ? (string) ($value ?? '') : json_encode($value),
+                    static fn($value) => is_scalar($value) || $value === null ? (string) $value : json_encode($value),
                     $row
                 );
                 fputcsv($output, $line);

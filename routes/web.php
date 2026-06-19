@@ -111,6 +111,8 @@ $router->post('/keamanan/store', 'KeamananController@store');
 // Statistik
 // ──────────────────────────────────────────
 $router->get('/statistik', 'StatistikController@index');
+$router->get('/laporan', 'LaporanController@index');
+$router->get('/laporan/export', 'LaporanController@export');
 
 // ──────────────────────────────────────────
 // Profil Pengguna

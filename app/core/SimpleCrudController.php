@@ -207,6 +207,7 @@ abstract class SimpleCrudController extends Controller
 
     protected function findOne(int $id): array|false
     {
+        // All select_sql/show_sql configs must use `base` as the primary table alias.
         $sql = ($this->config['show_sql'] ?? $this->config['select_sql']) . ' WHERE base.id = :id';
         return $this->model->fetchOneQuery($sql, ['id' => $id]);
     }

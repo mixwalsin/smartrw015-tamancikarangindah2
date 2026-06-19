@@ -44,7 +44,11 @@ function csrfField(): string
 function verifyCsrf(): bool
 {
     $token = $_POST['_token'] ?? '';
-    return $token !== '' && hash_equals($_SESSION['csrf_token'] ?? '', $token);
+    if ($token === '' || !isset($_SESSION['csrf_token'])) {
+        return false;
+    }
+
+    return hash_equals($_SESSION['csrf_token'], $token);
 }
 
 function setFlash(string $type, string $message): void

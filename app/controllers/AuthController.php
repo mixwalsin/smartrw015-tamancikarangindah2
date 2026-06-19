@@ -80,6 +80,7 @@ class AuthController extends Controller
         logActivity('logout', 'auth', authUser()['id'] ?? null, 'Pengguna logout');
         $_SESSION = [];
         if (ini_get('session.use_cookies')) {
+            // Gunakan timestamp lampau agar cookie sesi dihapus oleh browser.
             $params = session_get_cookie_params();
             setcookie(session_name(), '', time() - 42000, $params['path'], $params['domain'] ?? '', (bool) $params['secure'], (bool) $params['httponly']);
         }

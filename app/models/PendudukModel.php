@@ -146,7 +146,7 @@ class PendudukModel extends Model
         $rtStmt->execute([$data['rt']]);
         $rtId = (int) $rtStmt->fetchColumn();
         if ($rtId === 0) {
-            throw new RuntimeException('RT tidak valid: ' . ($data['rt'] ?? '-'));
+            throw new RuntimeException('RT tidak valid: ' . ($data['rt'] ?? '-') . '. Gunakan kode RT001 sampai RT007.');
         }
 
         $kkStmt = $this->db->prepare(

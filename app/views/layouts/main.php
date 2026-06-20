@@ -52,6 +52,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?= url('statistik') ?>"><i class="bi bi-bar-chart me-1"></i>Statistik</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?= url('laporan') ?>"><i class="bi bi-file-earmark-text me-1"></i>Laporan</a>
+                </li>
             </ul>
 
             <ul class="navbar-nav ms-auto">

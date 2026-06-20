@@ -111,6 +111,8 @@ $router->post('/keamanan/store', 'KeamananController@store');
 // Statistik
 // ──────────────────────────────────────────
 $router->get('/statistik', 'StatistikController@index');
+$router->get('/laporan', 'LaporanController@index');
+$router->get('/laporan/export', 'LaporanController@export');
 
 // ──────────────────────────────────────────
 // Profil Pengguna
@@ -134,3 +136,8 @@ $router->post('/admin/users/delete/:id', 'Admin\UserController@delete');
 // ──────────────────────────────────────────
 $router->get('/api/statistik', 'Api\StatistikController@index');
 $router->get('/api/pengaduan', 'Api\PengaduanController@index');
+$router->post('/api/notifications/whatsapp/pengajuan-surat', 'WhatsappNotificationController@pengajuanSurat');
+$router->post('/api/notifications/whatsapp/approval-surat', 'WhatsappNotificationController@approvalSurat');
+$router->post('/api/notifications/whatsapp/pengumuman', 'WhatsappNotificationController@pengumuman');
+$router->post('/api/notifications/whatsapp/iuran-bulanan', 'WhatsappNotificationController@iuranBulanan');
+$router->post('/api/notifications/whatsapp/jadwal-kegiatan', 'WhatsappNotificationController@jadwalKegiatan');

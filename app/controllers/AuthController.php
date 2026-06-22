@@ -8,15 +8,21 @@
 declare(strict_types=1);
 
 require_once APP_PATH . '/core/Controller.php';
+require_once APP_PATH . '/core/RbacService.php';
 require_once APP_PATH . '/models/UserModel.php';
+require_once APP_PATH . '/models/AuditLogModel.php';
 
 class AuthController extends Controller
 {
-    private UserModel $userModel;
+    private UserModel    $userModel;
+    private RbacService  $rbac;
+    private AuditLogModel $auditLog;
 
     public function __construct()
     {
         $this->userModel = new UserModel();
+        $this->rbac      = new RbacService();
+        $this->auditLog  = new AuditLogModel();
     }
 
     public function login(): void
@@ -57,15 +63,15 @@ class AuthController extends Controller
         }
 
         // Set session
-        $_SESSION['user'] = [
-            'id'       => $user['id'],
-            'name'     => $user['name'],
-            'username' => $user['username'],
-            'email'    => $user['email'],
-            'role'     => $user['role'],
-        ];
+        $_SESSION['user'] = $this->rbac->buildUserSession($user);
+
+        // Pre-load permissions into session cache
+        $this->rbac->refreshPermissions((int) $user['id']);
+        $this->rbac->getPermissions();
 
         $this->userModel->updateLastLogin((int) $user['id']);
+
+        $this->auditLog->log((int) $user['id'], 'login', 'auth', null, 'Login berhasil');
 
         setFlash('success', 'Selamat datang, ' . e($user['name']) . '!');
         $this->redirect('dashboard');
@@ -73,6 +79,10 @@ class AuthController extends Controller
 
     public function logout(): void
     {
+        $userId = (int) ($_SESSION['user']['id'] ?? 0);
+        if ($userId) {
+            $this->auditLog->log($userId, 'logout', 'auth', null, 'Logout');
+        }
         $_SESSION = [];
         session_destroy();
         $this->redirect('auth/login');
@@ -128,7 +138,7 @@ class AuthController extends Controller
             'username'  => $username,
             'email'     => $email,
             'password'  => password_hash($password, PASSWORD_BCRYPT),
-            'role'      => 'warga',
+            'role_id'   => 4, // Warga
             'is_active' => 0, // Perlu aktivasi admin
         ]);
 

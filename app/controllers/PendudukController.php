@@ -34,7 +34,7 @@ class PendudukController extends Controller
     public function create(): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw', 'rt');
+        $this->requirePermission('warga.create');
         $this->view('penduduk/create', [
             'title' => 'Tambah Penduduk - ' . APP_NAME,
         ]);
@@ -43,7 +43,7 @@ class PendudukController extends Controller
     public function store(): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw', 'rt');
+        $this->requirePermission('warga.create');
 
         if (!verifyCsrf()) {
             setFlash('error', 'Token keamanan tidak valid.');
@@ -98,7 +98,7 @@ class PendudukController extends Controller
     public function edit(string $id): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw', 'rt');
+        $this->requirePermission('warga.update');
         $penduduk = $this->model->find((int) $id);
         if (!$penduduk) {
             $this->redirect('penduduk');
@@ -112,7 +112,7 @@ class PendudukController extends Controller
     public function update(string $id): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw', 'rt');
+        $this->requirePermission('warga.update');
 
         if (!verifyCsrf()) {
             setFlash('error', 'Token keamanan tidak valid.');
@@ -140,7 +140,7 @@ class PendudukController extends Controller
     public function delete(string $id): void
     {
         $this->requireAuth();
-        $this->requireRole('admin', 'rw');
+        $this->requirePermission('warga.delete');
 
         if (!verifyCsrf()) {
             setFlash('error', 'Token keamanan tidak valid.');

@@ -127,14 +127,15 @@ class Router
             return;
         }
 
-        $controllerFile = APP_PATH . '/controllers/' . $class . '.php';
+        $controllerFile = APP_PATH . '/controllers/' . str_replace('\\', '/', $class) . '.php';
         if (!file_exists($controllerFile)) {
             $this->handleNotFound();
             return;
         }
         require_once $controllerFile;
 
-        if (!class_exists($class)) {
+        // Support both namespaced (Admin\FooController) and global class names
+        if (!class_exists($class) && !class_exists('\\' . $class)) {
             $this->handleNotFound();
             return;
         }

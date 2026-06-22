@@ -17,11 +17,14 @@ define('STORAGE_PATH', BASE_PATH . '/storage');
 
 // Autoload
 spl_autoload_register(function (string $class): void {
+    // Convert namespace separator to directory separator
+    $classPath = str_replace('\\', '/', $class);
     $paths = [
-        APP_PATH . '/core/' . $class . '.php',
-        APP_PATH . '/controllers/' . $class . '.php',
-        APP_PATH . '/models/' . $class . '.php',
-        APP_PATH . '/helpers/' . $class . '.php',
+        APP_PATH . '/core/' . $classPath . '.php',
+        APP_PATH . '/controllers/' . $classPath . '.php',
+        APP_PATH . '/models/' . $classPath . '.php',
+        APP_PATH . '/helpers/' . $classPath . '.php',
+        APP_PATH . '/middleware/' . $classPath . '.php',
     ];
     foreach ($paths as $path) {
         if (file_exists($path)) {
@@ -34,6 +37,7 @@ spl_autoload_register(function (string $class): void {
 // Load config
 require_once CONFIG_PATH . '/config.php';
 require_once CONFIG_PATH . '/database.php';
+require_once CONFIG_PATH . '/rbac.php';
 
 // Load helpers
 require_once APP_PATH . '/helpers/functions.php';

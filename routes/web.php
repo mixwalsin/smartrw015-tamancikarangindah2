@@ -49,9 +49,13 @@ $router->get('/surat', 'SuratController@index');
 $router->get('/surat/create', 'SuratController@create');
 $router->post('/surat/store', 'SuratController@store');
 $router->get('/surat/show/:id', 'SuratController@show');
+$router->post('/surat/verify-rt/:id', 'SuratController@verifyRt');
 $router->post('/surat/approve/:id', 'SuratController@approve');
 $router->post('/surat/reject/:id', 'SuratController@reject');
+$router->post('/surat/selesai/:id', 'SuratController@selesai');
 $router->get('/surat/print/:id', 'SuratController@print');
+$router->get('/surat/history', 'SuratController@history');
+$router->get('/surat/verify/:kode', 'SuratController@verify');
 
 // ──────────────────────────────────────────
 // Keuangan

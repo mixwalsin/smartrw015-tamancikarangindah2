@@ -271,30 +271,121 @@ CREATE TABLE IF NOT EXISTS `pengajuan_surat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Pengajuan / permohonan surat oleh warga';
 
--- ── 14. PENGADUAN ──────────────────────────────────────────
-CREATE TABLE IF NOT EXISTS `pengaduan` (
-    `id`              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    `warga_id`        INT UNSIGNED NOT NULL,
-    `kategori`        VARCHAR(80)  NOT NULL DEFAULT 'Umum'
-                                   COMMENT 'Contoh: Infrastruktur, Keamanan, Kebersihan, Sosial, Lainnya',
-    `judul`           VARCHAR(150) NOT NULL,
-    `isi`             TEXT         NOT NULL,
-    `foto`            VARCHAR(255) NULL,
-    `status`          ENUM('baru','diproses','selesai','ditolak') NOT NULL DEFAULT 'baru',
-    `catatan_admin`   TEXT         NULL,
-    `ditangani_oleh`  INT UNSIGNED NULL,
-    `ditangani_at`    DATETIME     NULL,
-    `created_at`      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `updated_at`      DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX `idx_pengaduan_warga`    (`warga_id`),
-    INDEX `idx_pengaduan_status`   (`status`),
-    INDEX `idx_pengaduan_kategori` (`kategori`(20)),
-    CONSTRAINT `fk_pengaduan_warga`    FOREIGN KEY (`warga_id`)       REFERENCES `warga`(`id`) ON DELETE CASCADE,
-    CONSTRAINT `fk_pengaduan_petugas`  FOREIGN KEY (`ditangani_oleh`) REFERENCES `users`(`id`) ON DELETE SET NULL
+-- ── 14. PENGADUAN KATEGORI ─────────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_kategori` (
+    `id`          SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `name`        VARCHAR(100) NOT NULL,
+    `slug`        VARCHAR(100) NOT NULL UNIQUE,
+    `description` TEXT         NULL,
+    `warna`       VARCHAR(20)  NOT NULL DEFAULT '#0d6efd',
+    `icon`        VARCHAR(50)  NOT NULL DEFAULT 'bi-megaphone',
+    `created_at`  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-  COMMENT='Pengaduan / laporan masalah dari warga';
+  COMMENT='Master kategori pengaduan warga';
 
--- ── 15. KEGIATAN ───────────────────────────────────────────
+-- ── 15. PENGADUAN ──────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan` (
+    `id`                INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `user_id`           INT UNSIGNED      NOT NULL,
+    `kategori_id`       SMALLINT UNSIGNED NOT NULL,
+    `no_tiket`          VARCHAR(30)       NOT NULL UNIQUE,
+    `judul`             VARCHAR(150)      NOT NULL,
+    `deskripsi`         LONGTEXT          NOT NULL,
+    `lokasi`            VARCHAR(255)      NULL,
+    `status`            ENUM('diterima','diproses_rt','diproses_rw','dalam_perbaikan','selesai','ditolak') NOT NULL DEFAULT 'diterima',
+    `prioritas`         ENUM('rendah','sedang','tinggi','darurat') NOT NULL DEFAULT 'sedang',
+    `sla_target_at`     DATETIME          NULL,
+    `last_status_note`  TEXT              NULL,
+    `rejection_reason`  TEXT              NULL,
+    `created_at`        DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME          NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_user`       (`user_id`),
+    INDEX `idx_pengaduan_status`     (`status`),
+    INDEX `idx_pengaduan_kategori`   (`kategori_id`),
+    INDEX `idx_pengaduan_prioritas`  (`prioritas`),
+    INDEX `idx_pengaduan_created_at` (`created_at`),
+    CONSTRAINT `fk_pengaduan_user`      FOREIGN KEY (`user_id`)     REFERENCES `users`(`id`)               ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_kategori`  FOREIGN KEY (`kategori_id`) REFERENCES `pengaduan_kategori`(`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Tabel utama pengaduan warga';
+
+-- ── 16. PENGADUAN_FOTO ──────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_foto` (
+    `id`           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `pengaduan_id` INT UNSIGNED NOT NULL,
+    `foto_path`    VARCHAR(255) NOT NULL,
+    `created_at`   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_foto_pengaduan` (`pengaduan_id`),
+    CONSTRAINT `fk_pengaduan_foto_pengaduan` FOREIGN KEY (`pengaduan_id`) REFERENCES `pengaduan`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Dokumentasi foto pengaduan';
+
+-- ── 17. PENGADUAN_KOMENTAR ──────────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_komentar` (
+    `id`            INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `pengaduan_id`  INT UNSIGNED NOT NULL,
+    `user_id`       INT UNSIGNED NOT NULL,
+    `komentar`      TEXT         NOT NULL,
+    `lampiran_path` VARCHAR(255) NULL,
+    `created_at`    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`    DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_komentar_pengaduan` (`pengaduan_id`),
+    INDEX `idx_pengaduan_komentar_user`      (`user_id`),
+    CONSTRAINT `fk_pengaduan_komentar_pengaduan` FOREIGN KEY (`pengaduan_id`) REFERENCES `pengaduan`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_komentar_user`      FOREIGN KEY (`user_id`)      REFERENCES `users`(`id`)     ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Komentar dan diskusi pengaduan';
+
+-- ── 18. PENGADUAN_DISPOSISI_RT ──────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_disposisi_rt` (
+    `id`                INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `pengaduan_id`      INT UNSIGNED NOT NULL,
+    `rt_id`             INT UNSIGNED NOT NULL COMMENT 'User RT yang melakukan disposisi',
+    `catatan`           TEXT         NOT NULL,
+    `jadwal_penanganan` DATETIME     NULL,
+    `petugas_id`        INT UNSIGNED NULL,
+    `created_at`        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_disposisi_rt_pengaduan` (`pengaduan_id`),
+    CONSTRAINT `fk_pengaduan_disposisi_rt_pengaduan` FOREIGN KEY (`pengaduan_id`) REFERENCES `pengaduan`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_disposisi_rt_rt`        FOREIGN KEY (`rt_id`)        REFERENCES `users`(`id`)     ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_disposisi_rt_petugas`   FOREIGN KEY (`petugas_id`)   REFERENCES `users`(`id`)     ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Disposisi dan verifikasi pengaduan oleh RT';
+
+-- ── 19. PENGADUAN_DISPOSISI_RW ──────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_disposisi_rw` (
+    `id`              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `pengaduan_id`    INT UNSIGNED NOT NULL,
+    `rw_id`           INT UNSIGNED NOT NULL COMMENT 'User RW yang melakukan review',
+    `catatan`         TEXT         NOT NULL,
+    `keputusan`       ENUM('review','approve','reject') NOT NULL DEFAULT 'review',
+    `alokasi_budget`  DECIMAL(14,2) NULL,
+    `departemen`      VARCHAR(150)  NULL,
+    `created_at`      DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_disposisi_rw_pengaduan` (`pengaduan_id`),
+    CONSTRAINT `fk_pengaduan_disposisi_rw_pengaduan` FOREIGN KEY (`pengaduan_id`) REFERENCES `pengaduan`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_disposisi_rw_rw`        FOREIGN KEY (`rw_id`)        REFERENCES `users`(`id`)     ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Review, approval, dan alokasi tindak lanjut oleh RW';
+
+-- ── 20. PENGADUAN_STATUS_HISTORY ────────────────────────────
+CREATE TABLE IF NOT EXISTS `pengaduan_status_history` (
+    `id`           INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `pengaduan_id` INT UNSIGNED NOT NULL,
+    `status_lama`  VARCHAR(50)  NULL,
+    `status_baru`  VARCHAR(50)  NOT NULL,
+    `keterangan`   TEXT         NULL,
+    `changed_by`   INT UNSIGNED NULL,
+    `changed_at`   DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_pengaduan_history_pengaduan` (`pengaduan_id`),
+    INDEX `idx_pengaduan_history_status`    (`status_baru`),
+    CONSTRAINT `fk_pengaduan_history_pengaduan` FOREIGN KEY (`pengaduan_id`) REFERENCES `pengaduan`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_pengaduan_history_user`      FOREIGN KEY (`changed_by`)   REFERENCES `users`(`id`)     ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Riwayat perubahan status pengaduan';
+
+-- ── 21. KEGIATAN ───────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS `kegiatan` (
     `id`           INT UNSIGNED     AUTO_INCREMENT PRIMARY KEY,
     `rt_id`        TINYINT UNSIGNED NULL COMMENT 'NULL = kegiatan seluruh RW',

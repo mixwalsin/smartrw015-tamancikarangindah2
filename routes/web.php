@@ -93,12 +93,51 @@ $router->post('/umkm/update/:id', 'UmkmController@update');
 $router->post('/umkm/delete/:id', 'UmkmController@delete');
 
 // ──────────────────────────────────────────
-// Posyandu
+// Posyandu - Dashboard
 // ──────────────────────────────────────────
 $router->get('/posyandu', 'PosyanduController@index');
-$router->get('/posyandu/create', 'PosyanduController@create');
-$router->post('/posyandu/store', 'PosyanduController@store');
-$router->get('/posyandu/show/:id', 'PosyanduController@show');
+
+// ── Balita
+$router->get('/posyandu/balita', 'PosyanduController@balitaIndex');
+$router->get('/posyandu/balita/create', 'PosyanduController@balitaCreate');
+$router->post('/posyandu/balita/store', 'PosyanduController@balitaStore');
+$router->get('/posyandu/balita/show/:id', 'PosyanduController@balitaShow');
+$router->get('/posyandu/balita/edit/:id', 'PosyanduController@balitaEdit');
+$router->post('/posyandu/balita/update/:id', 'PosyanduController@balitaUpdate');
+$router->post('/posyandu/balita/delete/:id', 'PosyanduController@balitaDelete');
+
+// ── Ibu Hamil
+$router->get('/posyandu/ibu-hamil', 'PosyanduController@ibuHamilIndex');
+$router->get('/posyandu/ibu-hamil/create', 'PosyanduController@ibuHamilCreate');
+$router->post('/posyandu/ibu-hamil/store', 'PosyanduController@ibuHamilStore');
+$router->get('/posyandu/ibu-hamil/show/:id', 'PosyanduController@ibuHamilShow');
+$router->get('/posyandu/ibu-hamil/edit/:id', 'PosyanduController@ibuHamilEdit');
+$router->post('/posyandu/ibu-hamil/update/:id', 'PosyanduController@ibuHamilUpdate');
+$router->post('/posyandu/ibu-hamil/delete/:id', 'PosyanduController@ibuHamilDelete');
+
+// ── Jadwal Posyandu
+$router->get('/posyandu/jadwal', 'PosyanduController@jadwalIndex');
+$router->get('/posyandu/jadwal/create', 'PosyanduController@jadwalCreate');
+$router->post('/posyandu/jadwal/store', 'PosyanduController@jadwalStore');
+$router->get('/posyandu/jadwal/edit/:id', 'PosyanduController@jadwalEdit');
+$router->post('/posyandu/jadwal/update/:id', 'PosyanduController@jadwalUpdate');
+$router->post('/posyandu/jadwal/delete/:id', 'PosyanduController@jadwalDelete');
+
+// ── Imunisasi
+$router->get('/posyandu/imunisasi', 'PosyanduController@imunisasiIndex');
+$router->get('/posyandu/imunisasi/create', 'PosyanduController@imunisasiCreate');
+$router->post('/posyandu/imunisasi/store', 'PosyanduController@imunisasiStore');
+$router->post('/posyandu/imunisasi/delete/:id', 'PosyanduController@imunisasiDelete');
+
+// ── Timbangan
+$router->get('/posyandu/timbangan', 'PosyanduController@timbanganIndex');
+$router->get('/posyandu/timbangan/create', 'PosyanduController@timbanganCreate');
+$router->post('/posyandu/timbangan/store', 'PosyanduController@timbanganStore');
+$router->post('/posyandu/timbangan/delete/:id', 'PosyanduController@timbanganDelete');
+
+// ── Grafik Pertumbuhan
+$router->get('/posyandu/grafik', 'PosyanduController@grafikIndex');
+$router->get('/posyandu/grafik/:balita_id', 'PosyanduController@grafikBalita');
 
 // ──────────────────────────────────────────
 // Keamanan / Security

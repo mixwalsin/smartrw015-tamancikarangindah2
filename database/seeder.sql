@@ -297,6 +297,51 @@ INSERT INTO `notifikasi`
 (5,  'Selamat Datang di Smart RW015',
  'Akun Anda telah berhasil didaftarkan. Selamat menggunakan layanan Smart RW015.','info',0);
 
+-- ── kas_categories ───────────────────────────────────────────
+INSERT INTO `kas_categories`
+(`id`,`name`,`slug`,`kas_type`,`transaction_type`,`description`) VALUES
+(1,'Iuran Bulanan','iuran-bulanan-rw','rw','pemasukan','Iuran rutin warga untuk kas RW'),
+(2,'Sumbangan','sumbangan-rw','rw','pemasukan','Sumbangan sukarela warga'),
+(3,'Kegiatan','kegiatan-rw','rw','pemasukan','Dana masuk dari kegiatan RW'),
+(4,'Operasional RW','operasional-rw','rw','pengeluaran','Biaya operasional rutin RW'),
+(5,'Perbaikan Fasilitas RW','perbaikan-rw','rw','pengeluaran','Biaya perbaikan fasilitas lingkungan'),
+(6,'Iuran Bulanan','iuran-bulanan-rt','rt','pemasukan','Iuran rutin warga untuk kas RT'),
+(7,'Sumbangan','sumbangan-rt','rt','pemasukan','Sumbangan sukarela untuk RT'),
+(8,'Kegiatan','kegiatan-rt','rt','pemasukan','Dana masuk dari kegiatan RT'),
+(9,'Transfer dari RW','transfer-rw-ke-rt','rt','pemasukan','Transfer dana dari kas RW ke RT'),
+(10,'Operasional RT','operasional-rt','rt','pengeluaran','Biaya operasional rutin RT'),
+(11,'Perbaikan Fasilitas RT','perbaikan-rt','rt','pengeluaran','Biaya perbaikan fasilitas RT');
+
+-- ── kas_transactions ─────────────────────────────────────────
+INSERT INTO `kas_transactions`
+(`kas_type`,`rt_id`,`transaction_type`,`category_id`,`amount`,`description`,`date`,`created_by`,`user_id`,`status`) VALUES
+('rw',NULL,'pemasukan',1,3000000.00,'Iuran warga RW bulan Juni 2026','2026-06-01',2,NULL,'approved'),
+('rw',NULL,'pemasukan',2,500000.00,'Sumbangan sukarela kegiatan HUT RI','2026-06-03',2,NULL,'approved'),
+('rw',NULL,'pengeluaran',4,175000.00,'Biaya administrasi dan ATK','2026-06-15',2,NULL,'approved'),
+('rw',NULL,'pengeluaran',5,350000.00,'Perbaikan fasilitas kebersihan RW','2026-06-20',2,NULL,'approved'),
+('rt',1,'pemasukan',6,600000.00,'Iuran RT001 bulan Juni 2026','2026-06-01',3,NULL,'approved'),
+('rt',1,'pengeluaran',10,75000.00,'Pembelian perlengkapan ronda','2026-06-12',3,NULL,'approved'),
+('rt',2,'pemasukan',6,700000.00,'Iuran RT002 bulan Juni 2026','2026-06-01',2,NULL,'approved'),
+('rt',2,'pengeluaran',11,200000.00,'Pengadaan tempat sampah pilah','2026-06-15',2,NULL,'approved'),
+('rt',2,'pemasukan',9,150000.00,'Transfer bantuan kegiatan dari RW','2026-06-25',2,NULL,'pending');
+
+-- ── kas_balance ──────────────────────────────────────────────
+INSERT INTO `kas_balance` (`kas_type`,`rt_id`,`balance`,`last_updated`) VALUES
+('rw',NULL,2975000.00,'2026-06-20 20:00:00'),
+('rt',1,525000.00,'2026-06-12 10:00:00'),
+('rt',2,500000.00,'2026-06-15 11:00:00');
+
+-- ── kas_balance_history ──────────────────────────────────────
+INSERT INTO `kas_balance_history` (`kas_type`,`rt_id`,`balance`,`transaction_id`,`created_at`) VALUES
+('rw',NULL,3000000.00,1,'2026-06-01 09:00:00'),
+('rw',NULL,3500000.00,2,'2026-06-03 09:30:00'),
+('rw',NULL,3325000.00,3,'2026-06-15 12:00:00'),
+('rw',NULL,2975000.00,4,'2026-06-20 20:00:00'),
+('rt',1,600000.00,5,'2026-06-01 08:00:00'),
+('rt',1,525000.00,6,'2026-06-12 10:00:00'),
+('rt',2,700000.00,7,'2026-06-01 08:30:00'),
+('rt',2,500000.00,8,'2026-06-15 11:00:00');
+
 -- ── log_aktivitas ──────────────────────────────────────────
 INSERT INTO `log_aktivitas`
 (`user_id`,`aksi`,`modul`,`data_id`,`keterangan`,`ip_address`) VALUES

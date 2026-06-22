@@ -208,6 +208,14 @@ function uploadFile(array $file, string $subDir = ''): string
     return ($subDir ? trim($subDir, '/') . '/' : '') . $fileName;
 }
 
+/**
+ * Validate NIK format: 16-digit numeric string
+ */
+function validateNik(string $nik): bool
+{
+    return strlen($nik) === 16 && ctype_digit($nik);
+}
+
 // ──────────────────────────────────────────
 // Pagination Helper
 // ──────────────────────────────────────────

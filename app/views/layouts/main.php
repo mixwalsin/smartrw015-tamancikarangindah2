@@ -46,7 +46,7 @@
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="<?= url('umkm') ?>"><i class="bi bi-shop me-1"></i>UMKM</a></li>
                         <li><a class="dropdown-item" href="<?= url('posyandu') ?>"><i class="bi bi-heart-pulse me-1"></i>Posyandu</a></li>
-                        <li><a class="dropdown-item" href="<?= url('keamanan') ?>"><i class="bi bi-shield-check me-1"></i>Keamanan</a></li>
+                        <li><a class="dropdown-item" href="<?= url('security') ?>"><i class="bi bi-shield-check me-1"></i>Security</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

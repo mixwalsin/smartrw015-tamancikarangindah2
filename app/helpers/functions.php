@@ -170,6 +170,29 @@ function slug(string $text): string
     return trim($text, '-');
 }
 
+/**
+ * Format RT/RW menjadi 3 digit (contoh: 1 -> 001)
+ */
+function formatRtRw(string $value): string
+{
+    $clean = (string) preg_replace('/[^0-9]/', '', $value);
+    if ($clean === '') {
+        return '';
+    }
+    return str_pad(substr($clean, 0, 3), 3, '0', STR_PAD_LEFT);
+}
+
+/**
+ * Hitung jumlah anggota aktif dalam satu KK
+ */
+function hitungJumlahAnggotaKk(int $kartuKeluargaId): int
+{
+    $db = Database::getInstance()->getConnection();
+    $stmt = $db->prepare('SELECT COUNT(*) FROM anggota_keluarga WHERE kartu_keluarga_id = ?');
+    $stmt->execute([$kartuKeluargaId]);
+    return (int) $stmt->fetchColumn();
+}
+
 // ──────────────────────────────────────────
 // File / Upload Helpers
 // ──────────────────────────────────────────

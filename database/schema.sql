@@ -524,4 +524,61 @@ CREATE TABLE IF NOT EXISTS `log_aktivitas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
   COMMENT='Audit trail aktivitas seluruh pengguna';
 
+-- ── 25. KARTU_KELUARGA (modul aplikasi) ─────────────────────
+CREATE TABLE IF NOT EXISTS `kartu_keluarga` (
+    `id`               INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `nomor_kk`         VARCHAR(16)  NOT NULL UNIQUE,
+    `kepala_keluarga`  VARCHAR(100) NOT NULL,
+    `alamat`           TEXT         NOT NULL,
+    `rt`               VARCHAR(3)   NOT NULL,
+    `rw`               VARCHAR(3)   NOT NULL,
+    `jumlah_anggota`   INT UNSIGNED NOT NULL DEFAULT 0,
+    `created_at`       DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`       DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX `idx_kartu_keluarga_rt_rw` (`rt`, `rw`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Data kartu keluarga untuk modul aplikasi';
+
+-- ── 26. ANGGOTA_KELUARGA (relasi ke warga) ───────────────────
+CREATE TABLE IF NOT EXISTS `anggota_keluarga` (
+    `id`                INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `kartu_keluarga_id` INT UNSIGNED NOT NULL,
+    `warga_id`          INT UNSIGNED NOT NULL,
+    `hubungan`          ENUM(
+                         'Kepala Keluarga',
+                         'Istri',
+                         'Anak',
+                         'Menantu',
+                         'Cucu',
+                         'Orang Tua',
+                         'Mertua',
+                         'Famili Lain',
+                         'Pembantu',
+                         'Lainnya'
+                       ) NOT NULL DEFAULT 'Lainnya',
+    `created_at`        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at`        DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY `uq_anggota_keluarga` (`kartu_keluarga_id`, `warga_id`),
+    INDEX `idx_anggota_keluarga_warga` (`warga_id`),
+    CONSTRAINT `fk_anggota_keluarga_kk` FOREIGN KEY (`kartu_keluarga_id`) REFERENCES `kartu_keluarga`(`id`) ON DELETE CASCADE,
+    CONSTRAINT `fk_anggota_keluarga_warga` FOREIGN KEY (`warga_id`) REFERENCES `warga`(`id`) ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Tracking anggota keluarga per kartu keluarga';
+
+-- ── 27. RIWAYAT_KK ───────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS `riwayat_kk` (
+    `id`                BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    `kartu_keluarga_id` INT UNSIGNED  NOT NULL,
+    `aksi`              VARCHAR(80)   NOT NULL,
+    `keterangan`        TEXT          NULL,
+    `data_sebelum`      JSON          NULL,
+    `data_sesudah`      JSON          NULL,
+    `diubah_oleh`       VARCHAR(100)  NULL,
+    `created_at`        DATETIME      NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    INDEX `idx_riwayat_kk_id` (`kartu_keluarga_id`),
+    INDEX `idx_riwayat_aksi` (`aksi`),
+    CONSTRAINT `fk_riwayat_kk` FOREIGN KEY (`kartu_keluarga_id`) REFERENCES `kartu_keluarga`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+  COMMENT='Riwayat perubahan data kartu keluarga';
+
 SET FOREIGN_KEY_CHECKS = 1;

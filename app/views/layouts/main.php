@@ -33,6 +33,9 @@
                     <a class="nav-link" href="<?= url('penduduk') ?>"><i class="bi bi-people me-1"></i>Penduduk</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="<?= url('kartu-keluarga') ?>"><i class="bi bi-card-checklist me-1"></i>Kartu Keluarga</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="<?= url('surat') ?>"><i class="bi bi-envelope me-1"></i>Surat</a>
                 </li>
                 <li class="nav-item dropdown">

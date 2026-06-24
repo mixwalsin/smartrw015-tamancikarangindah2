@@ -15,16 +15,14 @@ class KegiatanModel extends Model
 
     public function terbaru(int $limit = 5): array
     {
-        return $this->query(
-            "SELECT * FROM {$this->table} ORDER BY tanggal DESC LIMIT ?",
-            [$limit]
-        );
+        $stmt = $this->db->prepare('SELECT * FROM kegiatan ORDER BY tanggal DESC LIMIT :limit');
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
     }
 
     public function mendatang(): array
     {
-        return $this->query(
-            "SELECT * FROM {$this->table} WHERE tanggal >= CURDATE() ORDER BY tanggal ASC"
-        );
+        return $this->query('SELECT * FROM kegiatan WHERE tanggal >= CURDATE() ORDER BY tanggal ASC');
     }
 }

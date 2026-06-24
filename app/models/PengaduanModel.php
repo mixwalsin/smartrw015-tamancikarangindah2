@@ -13,13 +13,19 @@ class PengaduanModel extends Model
 {
     protected string $table = 'pengaduan';
 
+    public function count(): int
+    {
+        $stmt = $this->db->query('SELECT COUNT(*) FROM pengaduan');
+        return (int) $stmt->fetchColumn();
+    }
+
     public function getWithUser(): array
     {
         return $this->query(
-            "SELECT p.*, u.name as nama_pelapor
-             FROM {$this->table} p
-             LEFT JOIN users u ON p.user_id = u.id
-             ORDER BY p.created_at DESC"
+            'SELECT p.*, w.nama as nama_pelapor
+             FROM pengaduan p
+             LEFT JOIN warga w ON p.warga_id = w.id
+             ORDER BY p.created_at DESC'
         );
     }
 
@@ -28,16 +34,16 @@ class PengaduanModel extends Model
         return $this->where('status', $status);
     }
 
-    public function getByUser(int $userId): array
+    public function getByWarga(int $wargaId): array
     {
-        return $this->where('user_id', $userId);
+        return $this->where('warga_id', $wargaId);
     }
 
-    public function updateStatus(int $id, string $status, string $catatan = ''): bool
+    public function updateStatus(int $id, string $status, string $catatan = '', ?int $ditanganiOleh = null): bool
     {
         return $this->execute(
-            "UPDATE {$this->table} SET status = ?, catatan_admin = ?, updated_at = ? WHERE id = ?",
-            [$status, $catatan, date('Y-m-d H:i:s'), $id]
+            'UPDATE pengaduan SET status = ?, catatan_admin = ?, ditangani_oleh = ?, ditangani_at = ?, updated_at = ? WHERE id = ?',
+            [$status, $catatan, $ditanganiOleh, date('Y-m-d H:i:s'), date('Y-m-d H:i:s'), $id]
         );
     }
 }

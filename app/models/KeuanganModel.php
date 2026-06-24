@@ -11,37 +11,40 @@ require_once APP_PATH . '/core/Model.php';
 
 class KeuanganModel extends Model
 {
-    protected string $table = 'keuangan';
+    protected string $table = 'kas_rw';
 
     public function ringkasanBulanIni(): array
     {
         $rows = $this->query(
-            "SELECT jenis, SUM(jumlah) as total
-             FROM {$this->table}
+            'SELECT jenis, SUM(jumlah) as total
+             FROM kas_rw
              WHERE MONTH(tanggal) = MONTH(CURDATE()) AND YEAR(tanggal) = YEAR(CURDATE())
-             GROUP BY jenis"
+             GROUP BY jenis'
         );
 
-        $result = ['pemasukan' => 0, 'pengeluaran' => 0];
+        $result = ['pemasukan' => 0.0, 'pengeluaran' => 0.0];
         foreach ($rows as $row) {
             if ($row['jenis'] === 'pemasukan') {
                 $result['pemasukan'] = (float) $row['total'];
-            } elseif ($row['jenis'] === 'pengeluaran') {
+            }
+            if ($row['jenis'] === 'pengeluaran') {
                 $result['pengeluaran'] = (float) $row['total'];
             }
         }
+
         $result['saldo'] = $result['pemasukan'] - $result['pengeluaran'];
         return $result;
     }
 
-    public function saldoTotal(): float
+    public function saldoKasRw(): float
     {
-        $row = $this->query(
-            "SELECT
-                SUM(CASE WHEN jenis = 'pemasukan' THEN jumlah ELSE 0 END) -
-                SUM(CASE WHEN jenis = 'pengeluaran' THEN jumlah ELSE 0 END) AS saldo
-             FROM {$this->table}"
-        );
+        $row = $this->query('SELECT COALESCE(MAX(saldo_setelah), 0) AS saldo FROM kas_rw');
+        return (float) ($row[0]['saldo'] ?? 0);
+    }
+
+    public function saldoKasRt(): float
+    {
+        $row = $this->query('SELECT COALESCE(SUM(saldo_per_rt.saldo), 0) AS saldo FROM (SELECT MAX(saldo_setelah) AS saldo FROM kas_rt GROUP BY rt_id) saldo_per_rt');
         return (float) ($row[0]['saldo'] ?? 0);
     }
 }
